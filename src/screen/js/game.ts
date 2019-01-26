@@ -61,8 +61,8 @@ export class Game {
     const config = {
       parent: 'game',
       type: Phaser.AUTO,
-      width: 800,
-      height: 600,
+      width: window.innerWidth,
+      height: window.innerHeight,
       scene: {
         preload: function(this: Phaser.Scene) { game.preload(this); },
         create: function(this: Phaser.Scene) { game.create(this); },
