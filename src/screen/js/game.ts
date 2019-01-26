@@ -3,6 +3,7 @@ import { ControllerStateMap } from './controllerstatemap';
 import { Item } from './item/item';
 import { ItemType } from './item/itemtype';
 import { Player } from './player';
+import { World } from './world';
 
 type PlayerMap = Map<number, Player>;
 
@@ -17,6 +18,10 @@ export class Game {
   }
 
   preload(scene: Phaser.Scene): void {
+    scene.load.image('grass', 'screen/img/grass.jpg');
+    scene.load.image('grassfun1', 'screen/img/grassfun1.jpg');
+    scene.load.image('grassfun2', 'screen/img/grassfun2.jpg');
+    scene.load.image('grassfun3', 'screen/img/grassfun3.jpg');
     scene.load.image('poptart', 'screen/img/poptart.png');
     scene.load.image('poptartbox', 'screen/img/poptartbox.png');
     scene.load.image('shower', 'screen/img/shower.png');
@@ -25,6 +30,8 @@ export class Game {
   }
 
   create(scene: Phaser.Scene): void {
+    World.renderToScene(scene);
+
     this.controllerStateMap.forEach((_, deviceId) => {
       this.playerMap.set(deviceId,
         new Player(scene.add.sprite(200, 200, 'smiley')));
