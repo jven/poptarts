@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "lib": ["dom", "es6"],
     "noUnusedLocals": true,
     "outDir": "./build",
