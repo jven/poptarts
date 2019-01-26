@@ -17,9 +17,15 @@ poptarts/ $ npm run build
 ```
 
 3. Run a local web server:
-
+#### For Python 2:
 ```shell
 poptarts/ $ python -m SimpleHTTPServer 5000
+Serving HTTP on 0.0.0.0 port 5000 ...
+```
+
+#### For Python 3:
+```shell
+python3 -m http.server 5000
 Serving HTTP on 0.0.0.0 port 5000 ...
 ```
 
