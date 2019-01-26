@@ -55,5 +55,8 @@
       "check-type-operator",
       "check-preblock"
     ]
+  },
+  "linterOptions": {
+    "exclude": ["src/lib/phaser.d.ts"]
   }
 }
