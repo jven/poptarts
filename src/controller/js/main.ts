@@ -1,11 +1,15 @@
 /// <reference path="../../../node_modules/airconsole-typescript/airconsole-typescript.d.ts" />
 
+import { Intent } from '../../protocol/intent';
+import { IntentSender } from './intentsender';
+
 function controllerMain() {
   const airConsole = new AirConsole();
+  const intentSender = new IntentSender(airConsole);
 
   const button = document.getElementById('button')!;
   button.onclick = () => {
-    airConsole.message(AirConsole.SCREEN, 'Hallo!');
+    intentSender.send(Intent.PRESS_ACTION);
   };
 
   airConsole.onMessage = (from, data) => {

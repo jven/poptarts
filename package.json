@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/jven/poptarts#readme",
   "dependencies": {
-    "node": "^11.7.0"
+    "node": "^11.7.0",
+    "phaser": "^3.15.1"
   },
   "devDependencies": {
     "airconsole-typescript": "^1.0.2",
