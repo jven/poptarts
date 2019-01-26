@@ -17,7 +17,6 @@ export class Game {
   }
 
   create(scene: Phaser.Scene): void {
-    scene.add.image(50, 50, 'poptart');
     this.player = new Player(scene.add.sprite(200, 200, 'smiley'));
   }
 
