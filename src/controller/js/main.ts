@@ -1,15 +1,17 @@
-function main() {
+import AirConsole = require('airconsole');
+
+function controllerMain() {
   const airConsole = new AirConsole();
 
-  const button = document.getElementById('button');
+  const button = document.getElementById('button')!;
   button.onclick = () => {
     airConsole.message(AirConsole.SCREEN, 'Hallo!');
   }
 
   airConsole.onMessage = (from, data) => {
-    const info = document.getElementById('info');
+    const info = document.getElementById('info')!;
     info.innerText += `Got message from ${from}: ${data}\n`;
   };
 }
 
-window.onload = main;
+window.onload = controllerMain;

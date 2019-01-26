@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/jven/poptarts/issues"
   },
-  "homepage": "https://github.com/jven/poptarts#readme"
+  "homepage": "https://github.com/jven/poptarts#readme",
+  "dependencies": {
+    "node": "^11.7.0",
+    "typescript": "^3.2.4"
+  }
 }
