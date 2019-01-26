@@ -17,7 +17,7 @@ export class Game {
   }
 
   private preloadFn(this: Phaser.Scene): void {
-    this.load.image('poptart', 'img/poptart.png');
+    this.load.image('poptart', 'screen/img/poptart.png');
   }
 
   private createFn(this: Phaser.Scene): void {
