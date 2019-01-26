@@ -4,9 +4,11 @@
   "description": "Game for Global Game Jam 2019",
   "main": "N/A",
   "scripts": {
-    "build": "npm run compile && npm run copystatic",
+    "build": "npm run lint && npm run compile && npm run copystatic",
     "compile": "tsc",
-    "copystatic": "mkdir -p build/controller/css build/screen/css && cp -r src/*.html build && cp -r src/controller/css build/controller && cp -r src/screen/css build/screen"
+    "copystatic": "mkdir -p build/controller/css build/screen/css && cp -r src/*.html build && cp -r src/controller/css build/controller && cp -r src/screen/css build/screen",
+    "fixlint": "tslint --fix 'src/**/*.ts'",
+    "lint": "tslint 'src/**/*.ts'"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,10 @@
   },
   "homepage": "https://github.com/jven/poptarts#readme",
   "dependencies": {
-    "node": "^11.7.0",
+    "node": "^11.7.0"
+  },
+  "devDependencies": {
+    "tslint": "^5.12.1",
     "typescript": "^3.2.4"
   }
 }

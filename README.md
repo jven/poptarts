@@ -12,6 +12,7 @@ It's a game about getting ready in the morning, which includes eating lots of Po
 2. Compile the code and copy static files to the build directory:
 
 ```shell
+poptarts/ $ npm install
 poptarts/ $ npm run build
 ```
 
@@ -19,6 +20,7 @@ poptarts/ $ npm run build
 
 ```shell
 poptarts/ $ python -m SimpleHTTPServer 5000
+Serving HTTP on 0.0.0.0 port 5000 ...
 ```
 
 4. Go to http://www.airconsole.com/simulator/#http://localhost:5000/build and click "load normal".

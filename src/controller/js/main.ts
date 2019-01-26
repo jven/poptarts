@@ -6,7 +6,7 @@ function controllerMain() {
   const button = document.getElementById('button')!;
   button.onclick = () => {
     airConsole.message(AirConsole.SCREEN, 'Hallo!');
-  }
+  };
 
   airConsole.onMessage = (from, data) => {
     const info = document.getElementById('info')!;
