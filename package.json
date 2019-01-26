@@ -4,11 +4,12 @@
   "description": "Game for Global Game Jam 2019",
   "main": "N/A",
   "scripts": {
-    "build": "npm run lint && npm run compile && npm run copystatic",
+    "build": "npm run lint && npm run compile && npm run copystatic && npm run webpack-dev",
     "compile": "tsc",
     "copystatic": "mkdir -p build/controller/css build/screen/css && cp -r src/*.html build && cp -r src/controller/css build/controller && cp -r src/screen/css build/screen",
     "fixlint": "tslint --fix 'src/**/*.ts'",
-    "lint": "tslint 'src/**/*.ts'"
+    "lint": "tslint 'src/**/*.ts'",
+    "webpack-dev": "npx webpack --mode=development"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,10 @@
     "node": "^11.7.0"
   },
   "devDependencies": {
+    "airconsole-typescript": "^1.0.2",
     "tslint": "^5.12.1",
-    "typescript": "^3.2.4"
+    "typescript": "^3.2.4",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1"
   }
 }

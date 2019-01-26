@@ -4,8 +4,7 @@
     "noUnusedLocals": true,
     "outDir": "./build",
     "removeComments": true,
-    "strict": true,
-    "typeRoots": ["node_modules/@types", "tstypes"]
+    "strict": true
   },
   "include": ["src/**/*"]
 }

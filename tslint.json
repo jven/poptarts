@@ -9,7 +9,6 @@
     ],
     "class-name": true,
     "comment-format": [true, "check-space"],
-    "comment-type": [true, "singleline", "multiline", "doc"],
     "curly": true,
     "eofline": true,
     "file-name-casing": [true, "kebab-case"],
@@ -20,7 +19,7 @@
       true,
       {
         "limit": 80,
-        "ignore-pattern": "^import"
+        "ignore-pattern": "^import|///"
       }
     ],
     "no-debugger": true,

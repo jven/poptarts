@@ -1,4 +1,4 @@
-import AirConsole = require('airconsole');
+/// <reference path="../../../node_modules/airconsole-typescript/airconsole-typescript.d.ts" />
 
 function controllerMain() {
   const airConsole = new AirConsole();
