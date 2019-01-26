@@ -3,12 +3,12 @@ function main() {
 
   const button = document.getElementById('button');
   button.onclick = () => {
-    airConsole.message(AirConsole.SCREEN, 'Sup?');
+    airConsole.message(AirConsole.SCREEN, 'Hallo!');
   }
 
   airConsole.onMessage = (from, data) => {
     const info = document.getElementById('info');
-    info.innerText = data;
+    info.innerText += `Got message from ${from}: ${data}\n`;
   };
 }
 

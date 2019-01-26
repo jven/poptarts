@@ -1,0 +1,21 @@
+{
+  "name": "poptarts",
+  "version": "1.0.0",
+  "description": "Game for Global Game Jam 2019",
+  "main": "N/A",
+  "scripts": {
+    "build": "npm run compile && npm run copystatic",
+    "compile": "tsc",
+    "copystatic": "mkdir -p build/controller/css build/screen/css && cp -r src/*.html build && cp -r src/controller/css build/controller && cp -r src/screen/css build/screen"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jven/poptarts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jven/poptarts/issues"
+  },
+  "homepage": "https://github.com/jven/poptarts#readme"
+}
