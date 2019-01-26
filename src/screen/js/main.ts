@@ -7,12 +7,25 @@ import { Game } from './game';
 
 function screenMain() {
   const airConsole = new AirConsole();
-  const controllerStateMap = new Map<number, ControllerState>();
 
-  new ControllerStateUpdater(controllerStateMap)
-      .updateFromAirConsole(airConsole);
+  airConsole.onConnect = function(deviceId) {
+    const deviceIds = airConsole.getControllerDeviceIds();
 
-  Game.createAndInitializePhaser(controllerStateMap);
+    // Temporary Hack to delay start until 2 players (like in the emulator)
+    // TODO: Use a lobby instead
+    if (deviceIds.length < 2)  {
+      return;
+    }
+
+    const controllerStateMap = new Map<number, ControllerState>();
+    deviceIds.forEach((deviceId: number) => controllerStateMap
+      .set(deviceId, new ControllerState()));
+
+    new ControllerStateUpdater(controllerStateMap)
+        .updateFromAirConsole(airConsole);
+
+    Game.createAndInitializePhaser(controllerStateMap);
+  };
 }
 
 window.onload = screenMain;

@@ -2,13 +2,16 @@ import Phaser = require('phaser');
 import { ControllerStateMap } from './controllerstatemap';
 import { Player } from './player';
 
+type PlayerMap = Map<number, Player>;
+
 export class Game {
   private controllerStateMap: ControllerStateMap;
-  private player: Player | null;
+  private playerMap : PlayerMap;
 
-  private constructor(controllerStateMap: ControllerStateMap) {
+  private constructor(playerMap: PlayerMap,
+    controllerStateMap: ControllerStateMap) {
+    this.playerMap = playerMap;
     this.controllerStateMap = controllerStateMap;
-    this.player = null;
   }
 
   preload(scene: Phaser.Scene): void {
@@ -17,21 +20,21 @@ export class Game {
   }
 
   create(scene: Phaser.Scene): void {
-    scene.add.image(50, 50, 'poptart');
-    this.player = new Player(scene.add.sprite(200, 200, 'smiley'));
+    this.controllerStateMap.forEach((_, deviceId) => {
+      this.playerMap.set(deviceId,
+        new Player(scene.add.sprite(200, 200, 'smiley')));
+    });
   }
 
+
   update(scene: Phaser.Scene): void {
-    if (!this.controllerStateMap.size) {
-      return;
-    }
-    const playerId = this.controllerStateMap.keys().next().value;
-    const controllerState = this.controllerStateMap.get(playerId)!;
-    this.player!.update(controllerState);
+    this.controllerStateMap.forEach((state, deviceId) => {
+      this.playerMap.get(deviceId)!.update(state);
+    });
   }
 
   static createAndInitializePhaser(controllerStateMap: ControllerStateMap) {
-    const game = new Game(controllerStateMap);
+    const game = new Game(new Map(), controllerStateMap);
     const config = {
       parent: 'game',
       type: Phaser.AUTO,
