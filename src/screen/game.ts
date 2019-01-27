@@ -46,7 +46,7 @@ export class Game {
       const spawnLocation = this.world.spawnLocations()[i];
       const sprite = scene.physics.add.sprite(
           spawnLocation.x, spawnLocation.y, 'smiley');
-      this.playerMap.set(deviceIds[i], new Player(scene, sprite));
+      this.playerMap.set(deviceIds[i], new Player(this.world, sprite));
     }
 
     new Item(
@@ -77,7 +77,6 @@ export class Game {
     this.controllerStateMap.forEach((state, deviceId) => {
       this.playerMap.get(deviceId)!.update(state);
     });
-    this.playerMap.forEach(p => this.world!.collideWith(p));
   }
 
   setPhaserGame(phaserGame: Phaser.Game): void {

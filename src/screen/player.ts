@@ -1,38 +1,45 @@
 import { ControllerState } from './controllerstate/controllerstate';
+import { World } from './world';
 
-const SPEED = 300;
+const SPEED = 2;
 
 export class Player {
-  private scene: Phaser.Scene;
+  private world: World;
   private sprite: Phaser.Physics.Arcade.Sprite;
 
-  constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Arcade.Sprite) {
-    this.scene = scene;
+  constructor(world: World, sprite: Phaser.Physics.Arcade.Sprite) {
+    this.world = world;
     this.sprite = sprite;
     this.sprite.displayWidth = 50;
     this.sprite.displayHeight = 50;
   }
 
   update(controllerState: ControllerState): void {
+    let dx = 0;
+    let dy = 0;
     if (controllerState.isUpPressed()) {
-      this.sprite.setVelocityX(0);
-      this.sprite.setVelocityY(-SPEED);
+      dy = -SPEED;
     } else if (controllerState.isDownPressed()) {
-      this.sprite.setVelocityX(0);
-      this.sprite.setVelocityY(SPEED);
+      dy = SPEED;
     } else if (controllerState.isLeftPressed()) {
-      this.sprite.setVelocityX(-SPEED);
-      this.sprite.setVelocityY(0);
+      dx = -SPEED;
     } else if (controllerState.isRightPressed()) {
-      this.sprite.setVelocityX(SPEED);
-      this.sprite.setVelocityY(0);
+      dx = SPEED;
     } else {
-      this.sprite.setVelocityX(0);
-      this.sprite.setVelocityY(0);
+      return;
     }
-  }
 
-  collideWith(obstacles: ArcadeColliderType): void {
-    this.scene.physics.collide(this.sprite, obstacles);
+    const newTopLeft = {
+      x: this.sprite.x + dx - this.sprite.displayWidth / 2,
+      y: this.sprite.y + dy - this.sprite.displayHeight / 2
+    };
+    const dimensions = {
+      width: this.sprite.displayWidth,
+      height: this.sprite.displayHeight
+    };
+    if (!this.world.doesAnyObstacleIntersectRectangle(newTopLeft, dimensions)) {
+      this.sprite.x += dx;
+      this.sprite.y += dy;
+    }
   }
 }

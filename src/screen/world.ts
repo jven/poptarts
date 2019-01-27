@@ -8,9 +8,12 @@ const HOUSE_WIDTH = 900;
 const HOUSE_HEIGHT = 600;
 const DOORWAY_WIDTH = 60;
 
+export type Obstacle = Phaser.GameObjects.Sprite |
+    Phaser.GameObjects.TileSprite;
+
 export class World {
   private scene: Phaser.Scene;
-  private obstacles: Phaser.GameObjects.GameObject[];
+  private obstacles: Obstacle[];
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene;
@@ -47,8 +50,22 @@ export class World {
     ];
   }
 
-  collideWith(player: Player): void {
-    player.collideWith(this.obstacles);
+  doesAnyObstacleIntersectRectangle(
+      topLeft: Location, dimensions: Dimensions): boolean {
+    return !!this.obstacles.find(o => {
+      const oLeft = o.x - o.originX * o.displayWidth;
+      const oRight = o.x + (1 - o.originX) * o.displayWidth;
+      const oTop = o.y - o.originY * o.displayHeight;
+      const oBottom = o.y + (1 - o.originY) * o.displayHeight;
+      if (topLeft.x + dimensions.width < oLeft
+          || topLeft.x > oRight
+          || topLeft.y + dimensions.height < oTop
+          || topLeft.y > oBottom) {
+        return false;
+      }
+
+      return true;
+    });
   }
 
   private renderGrass(): void {
@@ -158,8 +175,8 @@ export class World {
     return dimensions;
   }
 
-  private wall(wall: Phaser.GameObjects.GameObject):
-      Phaser.GameObjects.GameObject {
-    return this.scene.physics.add.existing(wall, true /* isStatic */);
+  private wall(wall: Obstacle): Obstacle {
+    this.scene.physics.add.existing(wall, true /* isStatic */);
+    return wall;
   }
 }

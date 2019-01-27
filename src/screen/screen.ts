@@ -2,6 +2,7 @@
 /// <reference path="../definitions/phaser.d.ts" />
 
 import { ControllerState } from './controllerstate/controllerstate';
+import { ControllerStateMap } from './controllerstate/controllerstatemap';
 import { ControllerStateUpdater } from './controllerstate/controllerstateupdater';
 import { Game } from './game';
 
