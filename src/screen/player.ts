@@ -1,7 +1,7 @@
 import { ControllerState } from './controllerstate/controllerstate';
 import { World } from './world';
 
-const SPEED = 2;
+const SPEED = 5;
 
 export class Player {
   private world: World;
