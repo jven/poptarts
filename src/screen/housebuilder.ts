@@ -4,7 +4,7 @@ import { Location } from './location';
 export type Obstacle = Phaser.GameObjects.Sprite |
     Phaser.GameObjects.TileSprite;
 
-export class WorldBuilder {
+export class HouseBuilder {
   private scene: Phaser.Scene;
   private obstacles: Obstacle[];
   private houseTopLeft_: Location;
@@ -17,17 +17,17 @@ export class WorldBuilder {
     this.interiorDoorwaySize_ = 0;
   }
 
-  houseTopLeft(houseTopLeft: Location): WorldBuilder {
+  houseTopLeft(houseTopLeft: Location): HouseBuilder {
     this.houseTopLeft_ = houseTopLeft;
     return this;
   }
 
-  interiorDoorwaySize(interiorDoorwaySize: number): WorldBuilder {
+  interiorDoorwaySize(interiorDoorwaySize: number): HouseBuilder {
     this.interiorDoorwaySize_ = interiorDoorwaySize;
     return this;
   }
 
-  floor(dimensions: Dimensions): WorldBuilder {
+  floor(dimensions: Dimensions): HouseBuilder {
     this.scene.add.tileSprite(
         this.houseTopLeft_.x,
         this.houseTopLeft_.y,
@@ -40,7 +40,7 @@ export class WorldBuilder {
   topWall(
       leftX: number,
       topY: number,
-      wallWidth: number): WorldBuilder {
+      wallWidth: number): HouseBuilder {
     return this.topWallWithOrigin(0, leftX, topY, wallWidth);
   }
 
@@ -48,7 +48,7 @@ export class WorldBuilder {
       leftX: number,
       topY: number,
       wallWidth: number,
-      doorwayCenterX: number): WorldBuilder {
+      doorwayCenterX: number): HouseBuilder {
     return this
         .topWallWithOrigin(
             0, leftX, topY,
@@ -62,7 +62,7 @@ export class WorldBuilder {
       rightX: number,
       topY: number,
       wallHeight: number,
-      doorwayCenterY: number): WorldBuilder {
+      doorwayCenterY: number): HouseBuilder {
     return this.sideWallWithDoorway(
         0,
         false,
@@ -76,7 +76,7 @@ export class WorldBuilder {
       rightX: number,
       topY: number,
       wallHeight: number,
-      doorwayCenterY: number): WorldBuilder {
+      doorwayCenterY: number): HouseBuilder {
     return this.sideWallWithDoorway(
         1,
         true,
@@ -92,7 +92,7 @@ export class WorldBuilder {
       sideX: number,
       topY: number,
       wallHeight: number,
-      doorwayCenterY: number): WorldBuilder {
+      doorwayCenterY: number): HouseBuilder {
     this.sideWall(originX, 0, flipX, sideX, topY,
         (doorwayCenterY - this.interiorDoorwaySize_ / 2 - topY));
     this.sideWall(originX, 1, flipX, sideX, topY + wallHeight,
@@ -110,7 +110,7 @@ export class WorldBuilder {
       originX: number,
       sideX: number,
       topY: number,
-      wallWidth: number): WorldBuilder {
+      wallWidth: number): HouseBuilder {
     const wall = this.scene.add.tileSprite(
         this.houseTopLeft_.x + sideX,
         this.houseTopLeft_.y + topY,
@@ -127,7 +127,7 @@ export class WorldBuilder {
       flipX: boolean,
       sideX: number,
       wallY: number,
-      wallHeight: number): WorldBuilder {
+      wallHeight: number): HouseBuilder {
     const wall = this.scene.add.tileSprite(
         this.houseTopLeft_.x + sideX,
         this.houseTopLeft_.y + wallY,

@@ -1,7 +1,6 @@
 import { Dimensions } from './dimensions';
+import { HouseBuilder } from './housebuilder';
 import { Location } from './location';
-import { Player } from './player';
-import { WorldBuilder } from './worldbuilder';
 
 const HOUSE_TOP_LEFT = {x: 100, y: 100};
 const HOUSE_DIMENSIONS = {width: 900, height: 600};
@@ -28,7 +27,7 @@ export class World {
 
   render(): void {
     this.renderGrass();
-    new WorldBuilder(this.scene)
+    new HouseBuilder(this.scene)
         .houseTopLeft(HOUSE_TOP_LEFT)
         .interiorDoorwaySize(70)
         .floor(HOUSE_DIMENSIONS)
