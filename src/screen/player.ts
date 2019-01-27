@@ -1,4 +1,4 @@
-import { ControllerState } from './controllerstate';
+import { ControllerState } from './controllerstate/controllerstate';
 
 const SPEED = 300;
 

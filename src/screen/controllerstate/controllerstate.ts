@@ -1,4 +1,4 @@
-import { Intent } from '../protocol/intent';
+import { Intent } from '../../protocol/intent';
 
 export class ControllerState {
   private isUpPressed_: boolean;

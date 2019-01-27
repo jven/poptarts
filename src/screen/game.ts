@@ -1,5 +1,5 @@
 import Phaser = require('phaser');
-import { ControllerStateMap } from './controllerstatemap';
+import { ControllerStateMap } from './controllerstate/controllerstatemap';
 import { Item } from './item/item';
 import { ItemType } from './item/itemtype';
 import { Player } from './player';
