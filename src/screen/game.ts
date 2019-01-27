@@ -44,9 +44,9 @@ export class Game {
     const deviceIds = Array.from(this.controllerStateMap.keys());
     for (let i = 0; i < deviceIds.length; i++) {
       const spawnLocation = this.world.spawnLocations()[i];
-      const sprite = scene.add.sprite(
+      const sprite = scene.physics.add.sprite(
           spawnLocation.x, spawnLocation.y, 'smiley');
-      this.playerMap.set(deviceIds[i], new Player(sprite));
+      this.playerMap.set(deviceIds[i], new Player(scene, sprite));
     }
 
     new Item(
@@ -77,6 +77,7 @@ export class Game {
     this.controllerStateMap.forEach((state, deviceId) => {
       this.playerMap.get(deviceId)!.update(state);
     });
+    this.playerMap.forEach(p => this.world!.collideWith(p));
   }
 
   setPhaserGame(phaserGame: Phaser.Game): void {
@@ -87,14 +88,16 @@ export class Game {
     this.phaserGame!.resize(window.innerWidth, window.innerHeight);
   }
 
-  static createWithPhaserGame(
-      controllerStateMap: ControllerStateMap): Game {
+  static createWithPhaserGame(controllerStateMap: ControllerStateMap): Game {
     const game = new Game(controllerStateMap);
     const config = {
       parent: 'game',
       type: Phaser.AUTO,
       width: window.innerWidth,
       height: window.innerHeight,
+      physics: {
+        default: 'arcade'
+      },
       scene: {
         preload: function(this: Phaser.Scene) { game.preload(this); },
         create: function(this: Phaser.Scene) { game.create(this); },
