@@ -1,8 +1,8 @@
-import { Intent } from '../../protocol/intent';
+import { Intent } from '../protocol/intent';
 
 export class IntentSender {
   private airConsole: AirConsole;
-  
+
   constructor(airConsole: AirConsole) {
     this.airConsole = airConsole;
   }

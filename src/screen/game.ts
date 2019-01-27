@@ -12,11 +12,8 @@ export class Game {
   }
 
   preload(scene: Phaser.Scene): void {
-    // scene.load.image('poptart', 'screen/img/poptart.png');
-    // const preloadElem = document.getElementById('preload') as HTMLImageElement;
-    // preloadElem.src = 'screen/img/poptart.png';
-    // scene.load.image('poptart', 'screen/img/poptart.png');
-    // scene.load.image('smiley', 'screen/img/smiley.png');
+    scene.load.image('poptart', 'img/poptart.png');
+    scene.load.image('smiley', 'img/smiley.png');
   }
 
   create(scene: Phaser.Scene): void {
