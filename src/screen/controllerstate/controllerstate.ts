@@ -49,7 +49,6 @@ export class ControllerState {
         this.isLeftPressed_ = false;
         break;
       case Intent.RELEASE_ACTION:
-        this.isActionPressed_ = false;
         break;
     }
   }
@@ -71,6 +70,11 @@ export class ControllerState {
   }
 
   isActionPressed(): boolean {
-    return this.isActionPressed_;
+    if (this.isActionPressed_) {
+      this.isActionPressed_ = false;
+      return true;
+    }
+
+    return false;
   }
 }

@@ -140,9 +140,9 @@ export class Game {
     this.controllerStateMap.forEach((state, deviceId) => {
       const player = this.playerMap.get(deviceId)!;
       player.update(state);
-      if (player.item !== null) {
+      if (player.item() !== null) {
         console.log('move item');
-        player.item.move(player.getLocation());
+        player.item()!.move(player.getLocation());
       }
 
       if (state.isActionPressed()) {
@@ -161,10 +161,10 @@ export class Game {
         if (closestItems.length == 1) {
           closestItems[0].interact(player);
         } else if (closestItems.length == 2) {
-          if (closestItems[0] === player.item) {
+          if (closestItems[0] === player.item()) {
             closestItems[1].interact(player);
 
-            if (player.item === closestItems[0]) {
+            if (player.item() === closestItems[0]) {
               closestItems[0].interact(player);
             }
           } else {

@@ -1,3 +1,4 @@
+import { Depth } from '../depth';
 import { Dimensions } from '../dimensions';
 import { Location } from '../location';
 
@@ -8,6 +9,7 @@ export class Item {
       sprite: Phaser.GameObjects.Sprite,
       dimensions: Dimensions) {
     this.sprite = sprite;
+    this.sprite.depth = Depth.ITEM;
     this.sprite.displayWidth = dimensions.width;
     this.sprite.displayHeight = dimensions.height;
   }

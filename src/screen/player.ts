@@ -1,4 +1,5 @@
 import { ControllerState } from './controllerstate/controllerstate';
+import { Depth } from './depth';
 import { ItemStateMachine } from './item/itemstate';
 import { Location } from './location';
 import { World } from './world/world';
@@ -12,7 +13,7 @@ export class Player {
   private world: World;
   private spriteKey: string;
   private sprite: Phaser.Physics.Arcade.Sprite;
-  public item: ItemStateMachine | null;
+  private item_: ItemStateMachine | null;
   private currentSpeed: number;
   private standAnimation_: string;
 
@@ -27,13 +28,28 @@ export class Player {
     this.world = world;
     this.spriteKey = spriteKey;
     this.sprite = sprite;
+    this.sprite.depth = Depth.PLAYER_WITHOUT_ITEM;
     this.sprite.displayWidth = 36;
     this.sprite.displayHeight = 48;
-    this.item = null;
+    this.item_ = null;
     this.currentSpeed = SPEED;
 
     this.createAnimations_();
     this.standAnimation_ = this.spriteKey + 'standDown';
+  }
+
+  item(): ItemStateMachine | null {
+    return this.item_;
+  }
+
+  setItem(item: ItemStateMachine): void {
+    this.sprite.depth = Depth.PLAYER_WITH_ITEM;
+    this.item_ = item;
+  }
+
+  clearItem(): void {
+    this.sprite.depth = Depth.PLAYER_WITHOUT_ITEM;
+    this.item_ = null;
   }
 
   immobilize() {

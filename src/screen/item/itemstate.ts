@@ -43,17 +43,17 @@ export class Shower implements ItemStateMachine {
     }
 
     interact(player: Player): void {
-        if (player.item === null
+        if (player.item() === null
             && this.state === SHOWER_STATES.SHOWER_OFF) {
                 this.lastPlayerToUseShower = player;
                 player.immobilize();
-                player.item = this;
+                player.setItem(this);
                 this.state = SHOWER_STATES.SHOWER_IN_USE;
                 console.log('shower on');
         } else {
-            if (player.item === this) {
+            if (player.item() === this) {
                 player.mobilize();
-                player.item = null;
+                player.clearItem();
                 this.state = SHOWER_STATES.SHOWER_OFF;
                 this.showerDuration = 0;
                 console.log(SHOWER_STATES.SHOWER_OFF);
@@ -116,7 +116,7 @@ export class Cookable implements ItemStateMachine {
     update(timeDelta: number) {}
 
     interact(player: Player): void {
-        if (player.item === null) {
+        if (player.item() === null) {
             if (this.state === COOKABLE_STATE.COOKED) {
                 this.taskObserver.notifyEatPoptart(player);
                 this.eat();
@@ -126,11 +126,11 @@ export class Cookable implements ItemStateMachine {
                 poptart');
             } else if (this.state === COOKABLE_STATE.NOT_HEATING) {
                 console.log('Player picked up food');
-                player.item = this;
+                player.setItem(this);
             }
-        } else if (player.item === this) {
+        } else if (player.item() === this) {
             console.log('Player dropped food');
-            player.item = null;
+            player.clearItem();
         }
     }
 
@@ -196,9 +196,9 @@ export class Cookware implements ItemStateMachine {
 
     interact(player: Player): void {
         if (this.cookingItem === null) {
-            if (player.item instanceof Cookable) {
-                this.cookingItem = player.item;
-                player.item = null;
+            if (player.item() instanceof Cookable) {
+                this.cookingItem = player.item() as Cookable;
+                player.clearItem();
                 this.state = COOK_STATE.COOKING;
                 console.log('cooking food');
             }
