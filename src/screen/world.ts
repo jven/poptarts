@@ -3,8 +3,9 @@ import { Location } from './location';
 
 const TOP_LEFT_HOUSE_X = 100;
 const TOP_LEFT_HOUSE_Y = 100;
-const HOUSE_WIDTH = 1000;
-const HOUSE_HEIGHT = 800;
+const HOUSE_WIDTH = 900;
+const HOUSE_HEIGHT = 600;
+const DOORWAY_WIDTH = 60;
 
 export class World {
   private scene: Phaser.Scene;
@@ -30,15 +31,16 @@ export class World {
   render(): void {
     this.renderGrass();
     this.renderFloor();
-    this.renderWalls();
+    this.renderExteriorWalls();
+    this.renderKidsRoomWalls();
   }
 
   spawnLocations(): Location[] {
     return [
-      {x: 300, y: 400},
-      {x: 700, y: 400},
-      {x: 400, y: 600},
-      {x: 800, y: 600}
+      {x: 300, y: 300},
+      {x: 700, y: 300},
+      {x: 400, y: 500},
+      {x: 800, y: 500}
     ];
   }
 
@@ -68,7 +70,7 @@ export class World {
         'insidefloor').setOrigin(0, 0);
   }
 
-  private renderWalls(): void {
+  private renderExteriorWalls(): void {
     this.scene.add.tileSprite(
         TOP_LEFT_HOUSE_X,
         TOP_LEFT_HOUSE_Y,
@@ -79,7 +81,7 @@ export class World {
     this.scene.add.tileSprite(
         TOP_LEFT_HOUSE_X,
         TOP_LEFT_HOUSE_Y,
-      this.spriteSize('insidewallleft').width,
+        this.spriteSize('insidewallleft').width,
         HOUSE_HEIGHT,
         'insidewallleft').setOrigin(0, 0);
 
@@ -89,6 +91,43 @@ export class World {
         this.spriteSize('insidewallleft').width,
         HOUSE_HEIGHT,
         'insidewallleft').setOrigin(1, 0).setFlipX(true);
+  }
+
+  private renderKidsRoomWalls(): void {
+    const kidsRoomWidth = 300;
+    const kidsRoomHeight = 300;
+    const doorwayCenterY = TOP_LEFT_HOUSE_Y + (
+        this.spriteSize('insidewalltop').height + kidsRoomHeight) / 2;
+    this.scene.add.tileSprite(
+        TOP_LEFT_HOUSE_X + kidsRoomWidth,
+        TOP_LEFT_HOUSE_Y,
+        this.spriteSize('insidewallleft').width,
+        (doorwayCenterY - DOORWAY_WIDTH / 2 - TOP_LEFT_HOUSE_Y),
+        'insidewallleft').setOrigin(1, 0).setFlipX(true);
+    this.scene.add.tileSprite(
+        TOP_LEFT_HOUSE_X + kidsRoomWidth,
+        TOP_LEFT_HOUSE_Y + kidsRoomHeight,
+        this.spriteSize('insidewallleft').width,
+        (TOP_LEFT_HOUSE_Y + kidsRoomHeight - doorwayCenterY -
+            DOORWAY_WIDTH / 2),
+        'insidewallleft').setOrigin(1, 1).setFlipX(true);
+    this.scene.add.tileSprite(
+        TOP_LEFT_HOUSE_X,
+        TOP_LEFT_HOUSE_Y + kidsRoomHeight,
+        kidsRoomWidth / 2 - DOORWAY_WIDTH / 2,
+        this.spriteSize('insidewalltop').height,
+        'insidewalltop').setOrigin(0, 0);
+    this.scene.add.tileSprite(
+        TOP_LEFT_HOUSE_X + kidsRoomWidth,
+        TOP_LEFT_HOUSE_Y + kidsRoomHeight,
+        kidsRoomWidth / 2 - DOORWAY_WIDTH / 2,
+        this.spriteSize('insidewalltop').height,
+        'insidewalltop').setOrigin(1, 0);
+
+    this.scene.add.sprite(
+        TOP_LEFT_HOUSE_X + kidsRoomWidth,
+        doorwayCenterY - DOORWAY_WIDTH / 2,
+        'insidedoorway').setOrigin(1, 1);
   }
 
   private spriteSize(key: string): Dimensions {

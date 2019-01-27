@@ -29,6 +29,7 @@ export class Game {
     scene.load.image('smiley', 'img/smiley.png');
     scene.load.image('toaster', 'img/toaster.png');
 
+    scene.load.image('insidedoorway', 'img/house/insidedoorway.png');
     scene.load.image('insidefloor', 'img/house/insidefloor.png');
     scene.load.image('insidewallleft', 'img/house/insidewallleft.png');
     scene.load.image('insidewalltop', 'img/house/insidewalltop.png');
@@ -51,21 +52,21 @@ export class Game {
 
     new Item(
         ItemType.POPTART_BOX,
-        scene.add.sprite(600, 400, 'poptartbox'),
+        scene.add.sprite(900, 400, 'poptartbox'),
         {
           width: 50,
           height: 50
         });
     new Item(
         ItemType.SHOWER,
-        scene.add.sprite(400, 100, 'shower'),
+        scene.add.sprite(900, 100, 'shower'),
         {
           width: 80,
           height: 100
         });
     new Item(
         ItemType.TOASTER,
-        scene.add.sprite(300, 300, 'toaster'),
+        scene.add.sprite(900, 300, 'toaster'),
         {
           width: 50,
           height: 50
