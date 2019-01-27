@@ -4,7 +4,7 @@ import { Item } from './item/item';
 import { Cookable, Cookware, ItemStateMachine, Shower } from './item/itemstate';
 import { euclideanDistance } from './location';
 import { Player } from './player';
-import { World } from './world';
+import { World } from './world/world';
 
 const interactionRadius = 40;
 
@@ -57,7 +57,7 @@ export class Game {
     this.items = [
       new Shower(
         new Item(
-          scene.add.sprite(700, 300, 'shower'),
+          scene.add.sprite(600, 300, 'shower'),
           {
             width: 80,
             height: 100
@@ -78,6 +78,12 @@ export class Game {
           })
       )
     ];
+
+    const houseTopLeft = this.world.topLeftLocation();
+    scene.cameras.main
+        .setScroll(
+            houseTopLeft.x - 50,
+            houseTopLeft.y - 50);
   }
 
 

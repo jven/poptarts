@@ -1,7 +1,7 @@
 import { ControllerState } from './controllerstate/controllerstate';
 import { ItemStateMachine } from './item/itemstate';
 import { Location } from './location';
-import { World } from './world';
+import { World } from './world/world';
 
 const SPEED = 5;
 

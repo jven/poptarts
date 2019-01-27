@@ -70,7 +70,7 @@ export class Cookable implements ItemStateMachine {
     public cookTime: number;
     public ignitionTime: number;
     private item: Item;
-    private wasEaten: boolean
+    private wasEaten: boolean;
 
     constructor(cookTime: number,
         ignitionTime: number,
