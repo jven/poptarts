@@ -91,7 +91,7 @@ export class Game {
     const taskList = new TaskList(deviceIds);
     this.taskListRenderer = new TaskListRenderer(scene, taskList.getAllTasks());
 
-    const gameDurationMs = 5 * 1000;
+    const gameDurationMs = 60 * 1000;
 
     new GameClock(scene, 1200, 400, gameDurationMs, () => {
       this.endGame(scene, taskList);
