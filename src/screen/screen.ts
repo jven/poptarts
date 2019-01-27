@@ -21,9 +21,9 @@ function screenMain() {
 
     // Temporary Hack to delay start until 2 players (like in the emulator)
     // TODO: Use a lobby instead
-    if (deviceIds.length < 2)  {
-      return;
-    }
+    // if (deviceIds.length < 2)  {
+    //   return;
+    // }
 
     const controllerStateMap = new Map<number, ControllerState>();
     deviceIds.forEach((deviceId: number) => controllerStateMap

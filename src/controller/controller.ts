@@ -7,20 +7,24 @@ function controllerMain() {
   const airConsole = new AirConsole();
   const intentSender = new IntentSender(airConsole);
 
-  const buttonMap = new Map<string, Intent>();
-  buttonMap.set('pressUp', Intent.PRESS_UP);
-  buttonMap.set('pressRight', Intent.PRESS_RIGHT);
-  buttonMap.set('pressDown', Intent.PRESS_DOWN);
-  buttonMap.set('pressLeft', Intent.PRESS_LEFT);
-  buttonMap.set('pressAction', Intent.PRESS_ACTION);
-  buttonMap.set('releaseUp', Intent.RELEASE_UP);
-  buttonMap.set('releaseRight', Intent.RELEASE_RIGHT);
-  buttonMap.set('releaseDown', Intent.RELEASE_DOWN);
-  buttonMap.set('releaseLeft', Intent.RELEASE_LEFT);
-  buttonMap.set('releaseAction', Intent.RELEASE_ACTION);
-  buttonMap.forEach((intent, buttonId) => {
+  type elemId = string;
+  type eventName = string;
+  const buttonMap = new Map<[elemId, eventName], Intent>();
+  buttonMap.set(['up-btn', 'mousedown'], Intent.PRESS_UP);
+  buttonMap.set(['right-btn', 'mousedown'], Intent.PRESS_RIGHT);
+  buttonMap.set(['down-btn', 'mousedown'], Intent.PRESS_DOWN);
+  buttonMap.set(['left-btn', 'mousedown'], Intent.PRESS_LEFT);
+  buttonMap.set(['action-btn', 'mousedown'], Intent.PRESS_ACTION);
+  buttonMap.set(['up-btn', 'mouseup'], Intent.RELEASE_UP);
+  buttonMap.set(['right-btn', 'mouseup'], Intent.RELEASE_RIGHT);
+  buttonMap.set(['down-btn', 'mouseup'], Intent.RELEASE_DOWN);
+  buttonMap.set(['left-btn', 'mouseup'], Intent.RELEASE_LEFT);
+  buttonMap.set(['action-btn', 'mouseup'], Intent.RELEASE_ACTION);
+  buttonMap.forEach((intent, [buttonId, event]) => {
     const button = document.getElementById(buttonId)!;
-    button.onclick = () => intentSender.send(intent);
+    button.addEventListener(event, () => {
+      intentSender.send(intent);
+    });
   });
 }
 

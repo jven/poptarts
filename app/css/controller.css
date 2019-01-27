@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: white;
   font-size: 30px;
@@ -7,3 +11,38 @@ button {
   display: block;
   font-size: 30px;
 }
+
+.keypad-container {
+  width: 100%;
+  height: 100%;
+
+  /* border: 4px solid black; */
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 50px 3fr 4fr 3fr 50px;
+  /* grid-template-columns: [left-border] 10px 3fr 4fr 3fr 10px [right-border];
+  /* grid-template-rows: auto 4fr 5fr 4fr auto; */
+  /* grid-template-columns: [far-left] 1fr [mid-left] 1fr [mid-right] 1fr [far-right] 1fr; */
+  /* grid-template-rows: [far-top] 1fr [mid-top] 1fr [mid-bottom] 1fr [far-bottom] 1fr; */
+}
+
+.grid-item {
+  border: 3px solid black;
+}
+
+button {
+  width: 100%;
+  max-height: 100%;
+}
+
+/* .grid-up-btn {
+  border: 2px dashed pink;
+  grid-column-start: mid-left;
+  grid-column-end: mid-right;
+  grid-row-start: mid-top;
+  grid-row-end: mid-bottom;
+} */
+
+/* .grid-item  {
+} */
