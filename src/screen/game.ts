@@ -93,7 +93,7 @@ export class Game {
 
     const gameDurationMs = 60 * 1000;
 
-    new GameClock(scene, 1200, 400, gameDurationMs, () => {
+    new GameClock(scene, 1000, 200, gameDurationMs, () => {
       this.endGame(scene, taskList);
     });
 
@@ -110,6 +110,14 @@ export class Game {
       new Cookable(2000, 15000,
         new Item(
           scene.add.sprite(900, 600, 'poptartbox'),
+          {
+            width: 50,
+            height: 50
+          }),
+        taskList),
+      new Cookable(2000, 15000,
+        new Item(
+          scene.add.sprite(150, 550, 'poptartbox'),
           {
             width: 50,
             height: 50
