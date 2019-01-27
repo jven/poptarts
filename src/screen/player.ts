@@ -1,5 +1,7 @@
 import { ControllerState } from './controllerstate';
 
+const SPEED = 3;
+
 export class Player {
   private sprite: Phaser.GameObjects.Sprite;
 
@@ -11,15 +13,15 @@ export class Player {
 
   update(controllerState: ControllerState): void {
     if (controllerState.isUpPressed()) {
-      this.sprite.y -= 1;
+      this.sprite.y -= SPEED;
     } else if (controllerState.isDownPressed()) {
-      this.sprite.y += 1;
+      this.sprite.y += SPEED;
     }
 
     if (controllerState.isLeftPressed()) {
-      this.sprite.x -= 1;
+      this.sprite.x -= SPEED;
     } else if (controllerState.isRightPressed()) {
-      this.sprite.x += 1;
+      this.sprite.x += SPEED;
     }
   }
 }

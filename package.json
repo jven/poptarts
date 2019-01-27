@@ -11,12 +11,8 @@
     "dev:compile": "npm run dev:clean && concurrently \"npm run dev:compile-controller\" \"npm run dev:compile-screen\"",
     "dev:compile-controller": "parcel watch src/controller/controller.ts --out-dir app/js",
     "dev:compile-screen": "parcel watch src/screen/screen.ts --out-dir app/js",
-    "compile": "tsc",
-    "build": "npm run lint && npm run compile && npm run copystatic && npm run webpack-dev",
-    "copystatic": "mkdir -p build/controller/css build/screen/css && cp -r src/*.html build && cp -r src/controller/css build/controller && cp -r src/screen/css src/screen/img build/screen",
     "fixlint": "tslint --fix 'src/**/*.ts'",
-    "lint": "tslint 'src/**/*.ts'",
-    "webpack-dev": "npx webpack --mode=development"
+    "lint": "tslint 'src/**/*.ts'"
   },
   "repository": {
     "type": "git",

@@ -5,20 +5,20 @@ import { ItemType } from './item/itemtype';
 import { Player } from './player';
 import { World } from './world';
 
-type PlayerMap = Map<number, Player>;
-
 export class Game {
   private controllerStateMap: ControllerStateMap;
-  private playerMap : PlayerMap;
+  private playerMap: Map<number, Player>;
+  private phaserGame: Phaser.Game | null;
+  private world: World | null;
 
-  private constructor(playerMap: PlayerMap,
-    controllerStateMap: ControllerStateMap) {
-    this.playerMap = playerMap;
+  private constructor(controllerStateMap: ControllerStateMap) {
     this.controllerStateMap = controllerStateMap;
+    this.playerMap = new Map();
+    this.phaserGame = null;
+    this.world = null;
   }
 
   preload(scene: Phaser.Scene): void {
-
     scene.load.image('grass', 'img/grass.jpg');
     scene.load.image('grassfun1', 'img/grassfun1.jpg');
     scene.load.image('grassfun2', 'img/grassfun2.jpg');
@@ -35,17 +35,19 @@ export class Game {
     scene.load.image('outsidewall', 'img/house/outsidewall.png');
     scene.load.image(
         'outsidewallstart', 'img/house/outsidewallstart.png');
-
-
   }
 
   create(scene: Phaser.Scene): void {
-    World.renderToScene(scene);
+    this.world = new World(scene);
+    this.world.render();
 
-    this.controllerStateMap.forEach((_, deviceId) => {
-      this.playerMap.set(deviceId,
-        new Player(scene.add.sprite(200, 200, 'smiley')));
-    });
+    const deviceIds = Array.from(this.controllerStateMap.keys());
+    for (let i = 0; i < deviceIds.length; i++) {
+      const spawnLocation = this.world.spawnLocations()[i];
+      const sprite = scene.add.sprite(
+          spawnLocation.x, spawnLocation.y, 'smiley');
+      this.playerMap.set(deviceIds[i], new Player(sprite));
+    }
 
     new Item(
         ItemType.POPTART_BOX,
@@ -77,8 +79,17 @@ export class Game {
     });
   }
 
-  static createAndInitializePhaser(controllerStateMap: ControllerStateMap) {
-    const game = new Game(new Map(), controllerStateMap);
+  setPhaserGame(phaserGame: Phaser.Game): void {
+    this.phaserGame = phaserGame;
+  }
+
+  resize(): void {
+    this.phaserGame!.resize(window.innerWidth, window.innerHeight);
+  }
+
+  static createWithPhaserGame(
+      controllerStateMap: ControllerStateMap): Game {
+    const game = new Game(controllerStateMap);
     const config = {
       parent: 'game',
       type: Phaser.AUTO,
@@ -90,6 +101,9 @@ export class Game {
         update: function(this: Phaser.Scene) { game.update(this); }
       }
     };
-    new Phaser.Game(config);
+    const phaserGame = new Phaser.Game(config);
+    game.setPhaserGame(phaserGame);
+
+    return game;
   }
 }
