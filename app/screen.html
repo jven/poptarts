@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>Home is where the PopTarts are - SCREEN</title>
+    <link rel="stylesheet" type="text/css" href="css/screen.css">
+    <script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
+    <script type="text/javascript" src="js/screen.js"></script>
+  </head>
+  <body>
+    <div id="preload" style="display:none;">
+        <!-- <img src="img/poptart.png" alt=""> -->
+        <!-- <img src="img/smiley.png" alt=""> -->
+      </div>
+      <div id="game"></div>
+      <div id="info"></div>
+    
+    <script>
+      // Preload all the files
+      var fileNames = [
+        'grass.jpg',
+        'grassfun1.jpg',
+        'grassfun2.jpg',
+        'grassfun3.jpg',
+        'poptartbox.png',
+        'shower.png',
+        'toaster.png',
+        'house/insidefloor.png',
+        'house/insidewallleft.png',
+        'house/insidewalltop.png',
+        'house/outsidewall.png',
+        'house/outsidewallstart.png'
+      ]
+
+      var preloadElemTarget = document.getElementById('preload')
+      fileNames.forEach(fileName => {
+        var imgElem = document.createElement("IMG")
+        imgElem.src = `img/${fileName}`;
+        preloadElemTarget.appendChild(imgElem)
+      })
+    </script>
+  </body>
+</html>

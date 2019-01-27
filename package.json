@@ -4,8 +4,15 @@
   "description": "Game for Global Game Jam 2019",
   "main": "N/A",
   "scripts": {
-    "build": "npm run lint && npm run compile && npm run copystatic && npm run webpack-dev",
+    "dev": "concurrently \"npm run dev:compile\" \"npm run dev:server\"",
+    "ngrok": "ngrok http 5000",
+    "dev:server": "http-server -p 5000 app/",
+    "dev:clean": "rm -rf app/js",
+    "dev:compile": "npm run dev:clean && concurrently \"npm run dev:compile-controller\" \"npm run dev:compile-screen\"",
+    "dev:compile-controller": "parcel watch src/controller/controller.ts --out-dir app/js",
+    "dev:compile-screen": "parcel watch src/screen/screen.ts --out-dir app/js",
     "compile": "tsc",
+    "build": "npm run lint && npm run compile && npm run copystatic && npm run webpack-dev",
     "copystatic": "mkdir -p build/controller/css build/screen/css && cp -r src/*.html build && cp -r src/controller/css build/controller && cp -r src/screen/css src/screen/img build/screen",
     "fixlint": "tslint --fix 'src/**/*.ts'",
     "lint": "tslint 'src/**/*.ts'",
@@ -22,11 +29,15 @@
   },
   "homepage": "https://github.com/jven/poptarts#readme",
   "dependencies": {
+    "http-server": "^0.11.1",
     "node": "^11.7.0",
+    "parcel": "^1.11.0",
+    "parcel-bundler": "^1.11.0",
     "phaser": "^3.15.1"
   },
   "devDependencies": {
     "airconsole-typescript": "^1.0.2",
+    "concurrently": "^4.1.0",
     "tslint": "^5.12.1",
     "typescript": "^3.2.4",
     "webpack": "^4.29.0",

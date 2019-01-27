@@ -2,7 +2,7 @@ declare interface ActiveXObject {}
 
 declare type CallCallback = (item: Phaser.GameObjects.GameObject)=>void;
 
-declare type GridAlignConfig = {
+declare interface GridAlignConfig {
     /**
      * The width of the grid in items (not pixels). -1 means lay all items out horizontally, regardless of quantity.
      *                                  If both this value and height are set to -1 then this value overrides it and the `height` value is ignored.
@@ -33,9 +33,9 @@ declare type GridAlignConfig = {
      * Optionally place the top-left of the final grid at this coordinate.
      */
     y?: number;
-};
+}
 
-declare type JSONAnimation = {
+declare interface JSONAnimation {
     /**
      * The key that the animation will be associated with. i.e. sprite.animations.play(key)
      */
@@ -84,9 +84,9 @@ declare type JSONAnimation = {
      * Should sprite.visible = false when the animation finishes?
      */
     hideOnComplete: boolean;
-};
+}
 
-declare type AnimationFrameConfig = {
+declare interface AnimationFrameConfig {
     /**
      * The key that the animation will be associated with. i.e. sprite.animations.play(key)
      */
@@ -103,9 +103,9 @@ declare type AnimationFrameConfig = {
      * [description]
      */
     visible?: boolean;
-};
+}
 
-declare type AnimationConfig = {
+declare interface AnimationConfig {
     /**
      * The key that the animation will be associated with. i.e. sprite.animations.play(key)
      */
@@ -154,9 +154,9 @@ declare type AnimationConfig = {
      * Should sprite.visible = false when the animation finishes?
      */
     hideOnComplete?: boolean;
-};
+}
 
-declare type JSONAnimationFrame = {
+declare interface JSONAnimationFrame {
     /**
      * The key of the Texture this AnimationFrame uses.
      */
@@ -169,9 +169,9 @@ declare type JSONAnimationFrame = {
      * Additional time (in ms) that this frame should appear for during playback.
      */
     duration: number;
-};
+}
 
-declare type JSONAnimationManager = {
+declare interface JSONAnimationManager {
     /**
      * [description]
      */
@@ -180,9 +180,9 @@ declare type JSONAnimationManager = {
      * [description]
      */
     globalTimeScale: number;
-};
+}
 
-declare type GenerateFrameNamesConfig = {
+declare interface GenerateFrameNamesConfig {
     /**
      * [description]
      */
@@ -211,9 +211,9 @@ declare type GenerateFrameNamesConfig = {
      * [description]
      */
     frames?: boolean;
-};
+}
 
-declare type GenerateFrameNumbersConfig = {
+declare interface GenerateFrameNumbersConfig {
     /**
      * The starting frame of the animation.
      */
@@ -234,7 +234,7 @@ declare type GenerateFrameNumbersConfig = {
      * A custom sequence of frames.
      */
     frames?: boolean | integer[];
-};
+}
 
 /**
  * This callback type is completely empty, a no-operation.
@@ -243,7 +243,7 @@ declare type NOOP = ()=>void;
 
 declare type BootCallback = (game: Phaser.Game)=>void;
 
-declare type InputConfig = {
+declare interface InputConfig {
     /**
      * Keyboard input configuration. `true` uses the default configuration and `false` disables keyboard input.
      */
@@ -264,9 +264,9 @@ declare type InputConfig = {
      * The maximum number of touch pointers. See {@link Phaser.Input.InputManager#pointers}.
      */
     activePointers?: integer;
-};
+}
 
-declare type MouseInputConfig = {
+declare interface MouseInputConfig {
     /**
      * Where the Mouse Manager listens for mouse input events. The default is the game canvas.
      */
@@ -275,16 +275,16 @@ declare type MouseInputConfig = {
      * Whether mouse input events have preventDefault() called on them.
      */
     capture?: boolean;
-};
+}
 
-declare type KeyboardInputConfig = {
+declare interface KeyboardInputConfig {
     /**
      * Where the Keyboard Manager listens for keyboard input events.
      */
     target?: any;
-};
+}
 
-declare type TouchInputConfig = {
+declare interface TouchInputConfig {
     /**
      * Where the Touch Manager listens for touch input events. The default is the game canvas.
      */
@@ -293,16 +293,16 @@ declare type TouchInputConfig = {
      * Whether touch input events have preventDefault() called on them.
      */
     capture?: boolean;
-};
+}
 
-declare type GamepadInputConfig = {
+declare interface GamepadInputConfig {
     /**
      * Where the Gamepad Manager listens for gamepad input events.
      */
     target?: any;
-};
+}
 
-declare type BannerConfig = {
+declare interface BannerConfig {
     /**
      * Omit Phaser's name and version from the banner.
      */
@@ -315,9 +315,9 @@ declare type BannerConfig = {
      * The background colors of the banner.
      */
     background?: string[];
-};
+}
 
-declare type FPSConfig = {
+declare interface FPSConfig {
     /**
      * The minimum acceptable rendering rate, in frames per second.
      */
@@ -338,9 +338,9 @@ declare type FPSConfig = {
      * [description]
      */
     panicMax?: integer;
-};
+}
 
-declare type RenderConfig = {
+declare interface RenderConfig {
     /**
      * When set to `true`, WebGL uses linear interpolation to draw scaled or rotated textures, giving a smooth appearance. When set to `false`, WebGL uses nearest-neighbor interpolation, giving a crisper appearance. `false` also disables antialiasing of the game canvas itself, if the browser supports it, when the game canvas is scaled.
      */
@@ -389,9 +389,9 @@ declare type RenderConfig = {
      * The maximum number of lights allowed to be visible within range of a single Camera in the LightManager.
      */
     maxLights?: integer;
-};
+}
 
-declare type ScaleConfig = {
+declare interface ScaleConfig {
     /**
      * The base width of your game.
      */
@@ -432,9 +432,9 @@ declare type ScaleConfig = {
      * The maximum height the canvas can be scaled up to.
      */
     maxHeight?: integer;
-};
+}
 
-declare type CallbacksConfig = {
+declare interface CallbacksConfig {
     /**
      * A function to run at the start of the boot sequence.
      */
@@ -443,9 +443,9 @@ declare type CallbacksConfig = {
      * A function to run at the end of the boot sequence. At this point, all the game systems have started and plugins have been loaded.
      */
     postBoot?: BootCallback;
-};
+}
 
-declare type LoaderConfig = {
+declare interface LoaderConfig {
     /**
      * An URL used to resolve paths given to the loader. Example: 'http://labs.phaser.io/assets/'.
      */
@@ -482,9 +482,9 @@ declare type LoaderConfig = {
      * Optional XHR timeout value, in ms.
      */
     timeout?: integer;
-};
+}
 
-declare type DOMContainerConfig = {
+declare interface DOMContainerConfig {
     /**
      * Create a div element in which DOM Elements will be contained. You must also provide a parent.
      */
@@ -493,9 +493,9 @@ declare type DOMContainerConfig = {
      * Place the DOM Container behind the Phaser Canvas. The default is to place it over the Canvas.
      */
     behindCanvas?: boolean;
-};
+}
 
-declare type ImagesConfig = {
+declare interface ImagesConfig {
     /**
      * URL to use for the 'default' texture.
      */
@@ -504,9 +504,9 @@ declare type ImagesConfig = {
      * URL to use for the 'missing' texture.
      */
     missing?: string;
-};
+}
 
-declare type PhysicsConfig = {
+declare interface PhysicsConfig {
     /**
      * The default physics system. It will be started for each scene. Phaser provides 'arcade', 'impact', and 'matter'.
      */
@@ -523,9 +523,9 @@ declare type PhysicsConfig = {
      * Matter Physics configuration.
      */
     matter?: object;
-};
+}
 
-declare type PluginObjectItem = {
+declare interface PluginObjectItem {
     /**
      * A key to identify the plugin in the Plugin Manager.
      */
@@ -550,9 +550,9 @@ declare type PluginObjectItem = {
      * Arbitrary data passed to the plugin's init() method.
      */
     data?: any;
-};
+}
 
-declare type PluginObject = {
+declare interface PluginObject {
     /**
      * Global plugins to install.
      */
@@ -569,9 +569,9 @@ declare type PluginObject = {
      * Plugins to *add* to the default set of scene plugins.
      */
     defaultMerge?: string[];
-};
+}
 
-declare type GameConfig = {
+declare interface GameConfig {
     /**
      * The width of the game, in game pixels.
      */
@@ -680,11 +680,11 @@ declare type GameConfig = {
      * Plugins to install.
      */
     plugins?: PluginObject | PluginObjectItem[];
-};
+}
 
 declare type TimeStepCallback = (time: number, average: number, interpolation: number)=>void;
 
-declare type JSONCameraBounds = {
+declare interface JSONCameraBounds {
     /**
      * The horizontal position of camera
      */
@@ -701,9 +701,9 @@ declare type JSONCameraBounds = {
      * The height size of camera
      */
     height: number;
-};
+}
 
-declare type JSONCamera = {
+declare interface JSONCamera {
     /**
      * The name of the camera
      */
@@ -752,9 +752,9 @@ declare type JSONCamera = {
      * The bounds of camera
      */
     bounds?: JSONCameraBounds | undefined;
-};
+}
 
-declare type InputJSONCameraObject = {
+declare interface InputJSONCameraObject {
     /**
      * The name of the Camera.
      */
@@ -819,7 +819,7 @@ declare type InputJSONCameraObject = {
      * The height of the Camera bounds.
      */
     "bounds.height"?: number;
-};
+}
 
 declare type CameraFadeCallback = (camera: Phaser.Cameras.Scene2D.Camera, progress: number)=>void;
 
@@ -831,7 +831,7 @@ declare type CameraShakeCallback = (camera: Phaser.Cameras.Scene2D.Camera, progr
 
 declare type CameraZoomCallback = (camera: Phaser.Cameras.Scene2D.Camera, progress: number, zoom: number)=>void;
 
-declare type FixedKeyControlConfig = {
+declare interface FixedKeyControlConfig {
     /**
      * The Camera that this Control will update.
      */
@@ -868,9 +868,9 @@ declare type FixedKeyControlConfig = {
      * The horizontal and vertical speed the camera will move.
      */
     speed?: number | Object;
-};
+}
 
-declare type SmoothedKeyControlConfig = {
+declare interface SmoothedKeyControlConfig {
     /**
      * The Camera that this Control will update.
      */
@@ -911,11 +911,11 @@ declare type SmoothedKeyControlConfig = {
      * The maximum horizontal and vertical speed the camera will move.
      */
     maxSpeed?: number | Object;
-};
+}
 
 declare type GenerateTextureRendererCallback = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D)=>void;
 
-declare type GenerateTextureConfig = {
+declare interface GenerateTextureConfig {
     /**
      * [description]
      */
@@ -952,9 +952,9 @@ declare type GenerateTextureConfig = {
      * [description]
      */
     postRender?: GenerateTextureRendererCallback;
-};
+}
 
-declare type Palette = {
+declare interface Palette {
     /**
      * Color value 1.
      */
@@ -1019,9 +1019,9 @@ declare type Palette = {
      * Color value 16.
      */
     F: string;
-};
+}
 
-declare type JSONEllipseCurve = {
+declare interface JSONEllipseCurve {
     /**
      * The of the curve.
      */
@@ -1058,9 +1058,9 @@ declare type JSONEllipseCurve = {
      * The rotation of ellipse, in degrees.
      */
     rotation: integer;
-};
+}
 
-declare type EllipseCurveConfig = {
+declare interface EllipseCurveConfig {
     /**
      * The x coordinate of the ellipse.
      */
@@ -1093,9 +1093,9 @@ declare type EllipseCurveConfig = {
      * The rotation of the ellipse, in degrees.
      */
     rotation?: integer;
-};
+}
 
-declare type JSONCurve = {
+declare interface JSONCurve {
     /**
      * The of the curve
      */
@@ -1104,9 +1104,9 @@ declare type JSONCurve = {
      * The arrays of points like `[x1, y1, x2, y2]`
      */
     points: number[];
-};
+}
 
-declare type JSONPath = {
+declare interface JSONPath {
     /**
      * The of the curve.
      */
@@ -1127,7 +1127,7 @@ declare type JSONPath = {
      * The list of the curves
      */
     curves: JSONCurve[];
-};
+}
 
 declare type DataEachCallback = (parent: any, key: string, value: any, ...args: any[])=>void;
 
@@ -1136,7 +1136,7 @@ declare type DataEachCallback = (parent: any, key: string, value: any, ...args: 
  */
 declare function init(): void;
 
-declare type InputColorObject = {
+declare interface InputColorObject {
     /**
      * The red color value in the range 0 to 255.
      */
@@ -1153,7 +1153,7 @@ declare type InputColorObject = {
      * The alpha color value in the range 0 to 255.
      */
     a?: number;
-};
+}
 
 declare type ColorObject = ()=>void;
 
@@ -1199,7 +1199,7 @@ declare namespace Phaser.Display.Color {
 
 }
 
-declare type HSVColorObject = {
+declare interface HSVColorObject {
     /**
      * The hue color value. A number between 0 and 1
      */
@@ -1212,11 +1212,11 @@ declare type HSVColorObject = {
      * The lightness color value. A number between 0 and 1
      */
     v: number;
-};
+}
 
 declare type ContentLoadedCallback = ()=>void;
 
-declare type DisplayCallbackConfig = {
+declare interface DisplayCallbackConfig {
     /**
      * The tint of the character being rendered.
      */
@@ -1249,7 +1249,7 @@ declare type DisplayCallbackConfig = {
      * Custom data stored with the character being rendered.
      */
     data: any;
-};
+}
 
 declare type DisplayCallback = (display: DisplayCallbackConfig)=>void;
 
@@ -1268,7 +1268,7 @@ declare type BitmapTextConfig = GameObjectConfig & {
     size?: number | false;
 };
 
-declare type BitmapTextSize = {
+declare interface BitmapTextSize {
     /**
      * The position and size of the BitmapText, taking into account the position and scale of the Game Object.
      */
@@ -1277,12 +1277,12 @@ declare type BitmapTextSize = {
      * The position and size of the BitmapText, taking just the font size into account.
      */
     local: LocalBitmapTextSize;
-};
+}
 
 /**
  * The position and size of the Bitmap Text in global space, taking into account the Game Object's scale and world position.
  */
-declare type GlobalBitmapTextSize = {
+declare interface GlobalBitmapTextSize {
     /**
      * The x position of the BitmapText, taking into account the x position and scale of the Game Object.
      */
@@ -1299,12 +1299,12 @@ declare type GlobalBitmapTextSize = {
      * The height of the BitmapText, taking into account the y scale of the Game Object.
      */
     height: number;
-};
+}
 
 /**
  * The position and size of the Bitmap Text in local space, taking just the font size into account.
  */
-declare type LocalBitmapTextSize = {
+declare interface LocalBitmapTextSize {
     /**
      * The x position of the BitmapText.
      */
@@ -1321,14 +1321,14 @@ declare type LocalBitmapTextSize = {
      * The height of the BitmapText.
      */
     height: number;
-};
+}
 
 /**
  * The font data for an individual character of a Bitmap Font.
  * 
  * Describes the character's position, size, offset and kerning.
  */
-declare type BitmapFontCharacterData = {
+declare interface BitmapFontCharacterData {
     /**
      * The x position of the character.
      */
@@ -1369,12 +1369,12 @@ declare type BitmapFontCharacterData = {
      * Kerning values, keyed by character code.
      */
     kerning: {[key: string]: number};
-};
+}
 
 /**
  * Bitmap Font data that can be used by a BitmapText Game Object.
  */
-declare type BitmapFontData = {
+declare interface BitmapFontData {
     /**
      * The name of the font.
      */
@@ -1395,7 +1395,7 @@ declare type BitmapFontData = {
      * The character data of the font, keyed by character code. Each character datum includes a position, size, offset and more.
      */
     chars: {[key: number]:  BitmapFontCharacterData};
-};
+}
 
 declare type JSONBitmapText = JSONGameObject & {
     /**
@@ -1574,7 +1574,7 @@ declare namespace Phaser.GameObjects.Blitter {
 
 }
 
-declare type GameObjectConfig = {
+declare interface GameObjectConfig {
     /**
      * The x position of the Game Object.
      */
@@ -1635,9 +1635,9 @@ declare type GameObjectConfig = {
      * Add the GameObject to the scene.
      */
     add?: boolean;
-};
+}
 
-declare type JSONGameObject = {
+declare interface JSONGameObject {
     /**
      * The name of this Game Object.
      */
@@ -1718,7 +1718,7 @@ declare type JSONGameObject = {
      * The data of this Game Object.
      */
     data: object;
-};
+}
 
 declare type EachContainerCallback<I> = (item: any, ...args: any[])=>void;
 
@@ -1731,7 +1731,7 @@ declare namespace Phaser.GameObjects.Graphics {
 /**
  * Graphics line style (or stroke style) settings.
  */
-declare type GraphicsLineStyle = {
+declare interface GraphicsLineStyle {
     /**
      * The stroke width.
      */
@@ -1744,12 +1744,12 @@ declare type GraphicsLineStyle = {
      * The stroke alpha.
      */
     alpha?: number;
-};
+}
 
 /**
  * Graphics fill style settings.
  */
-declare type GraphicsFillStyle = {
+declare interface GraphicsFillStyle {
     /**
      * The fill color.
      */
@@ -1758,12 +1758,12 @@ declare type GraphicsFillStyle = {
      * The fill alpha.
      */
     alpha?: number;
-};
+}
 
 /**
  * Graphics style settings.
  */
-declare type GraphicsStyles = {
+declare interface GraphicsStyles {
     /**
      * The style applied to shape outlines.
      */
@@ -1772,7 +1772,7 @@ declare type GraphicsStyles = {
      * The style applied to shape areas.
      */
     fillStyle?: GraphicsFillStyle;
-};
+}
 
 /**
  * Options for the Graphics game Object.
@@ -1792,7 +1792,7 @@ declare type GroupCallback = (item: Phaser.GameObjects.GameObject)=>void;
 
 declare type GroupMultipleCreateCallback = (items: Phaser.GameObjects.GameObject[])=>void;
 
-declare type GroupConfig = {
+declare interface GroupConfig {
     /**
      * Sets {@link Phaser.GameObjects.Group#classType}.
      */
@@ -1829,7 +1829,7 @@ declare type GroupConfig = {
      * Sets {@link Phaser.GameObjects.Group#createMultipleCallback}.
      */
     createMultipleCallback?: GroupMultipleCreateCallback;
-};
+}
 
 /**
  * The total number of objects created will be
@@ -1842,7 +1842,7 @@ declare type GroupConfig = {
  * 
  * `key` is required. {@link Phaser.GameObjects.Group#defaultKey} is not used.
  */
-declare type GroupCreateConfig = {
+declare interface GroupCreateConfig {
     /**
      * The class of each new Game Object.
      */
@@ -1951,7 +1951,7 @@ declare type GroupCreateConfig = {
      * Align the new Game Objects in a grid using these settings.
      */
     gridAlign?: false | GridAlignConfig;
-};
+}
 
 declare type LightForEach = (light: Phaser.GameObjects.Light)=>void;
 
@@ -1968,17 +1968,17 @@ declare type EmitterOpOnUpdateCallback = (particle: Phaser.GameObjects.Particles
 /**
  * Defines an operation yielding a random value within a range.
  */
-declare type EmitterOpRandomConfig = {
+declare interface EmitterOpRandomConfig {
     /**
      * The minimum and maximum values, as [min, max].
      */
     random: number[];
-};
+}
 
 /**
  * Defines an operation yielding a random value within a range.
  */
-declare type EmitterOpRandomMinMaxConfig = {
+declare interface EmitterOpRandomMinMaxConfig {
     /**
      * The minimum value.
      */
@@ -1987,12 +1987,12 @@ declare type EmitterOpRandomMinMaxConfig = {
      * The maximum value.
      */
     max: number;
-};
+}
 
 /**
  * Defines an operation yielding a random value within a range.
  */
-declare type EmitterOpRandomStartEndConfig = {
+declare interface EmitterOpRandomStartEndConfig {
     /**
      * The starting value.
      */
@@ -2005,12 +2005,12 @@ declare type EmitterOpRandomStartEndConfig = {
      * If false, this becomes {@link EmitterOpEaseConfig}.
      */
     random: boolean;
-};
+}
 
 /**
  * Defines an operation yielding a value incremented continuously across a range.
  */
-declare type EmitterOpEaseConfig = {
+declare interface EmitterOpEaseConfig {
     /**
      * The starting value.
      */
@@ -2023,12 +2023,12 @@ declare type EmitterOpEaseConfig = {
      * The name of the easing function.
      */
     ease?: string;
-};
+}
 
 /**
  * Defines an operation yielding a value incremented by steps across a range.
  */
-declare type EmitterOpSteppedConfig = {
+declare interface EmitterOpSteppedConfig {
     /**
      * The starting value.
      */
@@ -2041,16 +2041,16 @@ declare type EmitterOpSteppedConfig = {
      * The number of steps between start and end.
      */
     steps: number;
-};
+}
 
-declare type EmitterOpCustomEmitConfig = {
+declare interface EmitterOpCustomEmitConfig {
     /**
      * [description]
      */
     onEmit: EmitterOpOnEmitCallback;
-};
+}
 
-declare type EmitterOpCustomUpdateConfig = {
+declare interface EmitterOpCustomUpdateConfig {
     /**
      * [description]
      */
@@ -2059,9 +2059,9 @@ declare type EmitterOpCustomUpdateConfig = {
      * [description]
      */
     onUpdate: EmitterOpOnUpdateCallback;
-};
+}
 
-declare type GravityWellConfig = {
+declare interface GravityWellConfig {
     /**
      * The x coordinate of the Gravity Well, in world space.
      */
@@ -2082,13 +2082,13 @@ declare type GravityWellConfig = {
      * The gravitational force of this Gravity Well.
      */
     gravity?: number;
-};
+}
 
 declare type ParticleEmitterCallback = (particle: Phaser.GameObjects.Particles.Particle, emitter: Phaser.GameObjects.Particles.ParticleEmitter)=>void;
 
 declare type ParticleDeathCallback = (particle: Phaser.GameObjects.Particles.Particle)=>void;
 
-declare type ParticleEmitterBounds = {
+declare interface ParticleEmitterBounds {
     /**
      * The left edge of the rectangle.
      */
@@ -2105,9 +2105,9 @@ declare type ParticleEmitterBounds = {
      * The height of the rectangle.
      */
     height: number;
-};
+}
 
-declare type ParticleEmitterBoundsAlt = {
+declare interface ParticleEmitterBoundsAlt {
     /**
      * The left edge of the rectangle.
      */
@@ -2124,9 +2124,9 @@ declare type ParticleEmitterBoundsAlt = {
      * The height of the rectangle.
      */
     h: number;
-};
+}
 
-declare type ParticleEmitterDeathZoneConfig = {
+declare interface ParticleEmitterDeathZoneConfig {
     /**
      * A shape representing the zone. See {@link Phaser.GameObjects.Particles.Zones.DeathZone#source}.
      */
@@ -2135,9 +2135,9 @@ declare type ParticleEmitterDeathZoneConfig = {
      * 'onEnter' or 'onLeave'.
      */
     type?: string;
-};
+}
 
-declare type ParticleEmitterEdgeZoneConfig = {
+declare interface ParticleEmitterEdgeZoneConfig {
     /**
      * A shape representing the zone. See {@link Phaser.GameObjects.Particles.Zones.EdgeZone#source}.
      */
@@ -2162,9 +2162,9 @@ declare type ParticleEmitterEdgeZoneConfig = {
      * Whether one endpoint will be removed if it's identical to the other.
      */
     seamless?: boolean;
-};
+}
 
-declare type ParticleEmitterRandomZoneConfig = {
+declare interface ParticleEmitterRandomZoneConfig {
     /**
      * A shape representing the zone. See {@link Phaser.GameObjects.Particles.Zones.RandomZone#source}.
      */
@@ -2173,9 +2173,9 @@ declare type ParticleEmitterRandomZoneConfig = {
      * 'random'.
      */
     type?: string;
-};
+}
 
-declare type ParticleEmitterConfig = {
+declare interface ParticleEmitterConfig {
     /**
      * Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#active}.
      */
@@ -2384,9 +2384,9 @@ declare type ParticleEmitterConfig = {
      * Sets {@link Phaser.GameObjects.Particles.ParticleEmitter#frames}.
      */
     frames?: number | number[] | string | string[] | Phaser.Textures.Frame | Phaser.Textures.Frame[] | ParticleEmitterFrameConfig;
-};
+}
 
-declare type ParticleEmitterFrameConfig = {
+declare interface ParticleEmitterFrameConfig {
     /**
      * One or more texture frames.
      */
@@ -2399,36 +2399,36 @@ declare type ParticleEmitterFrameConfig = {
      * The number of consecutive particles receiving each texture frame, when `cycle` is true.
      */
     quantity?: integer;
-};
+}
 
 declare type DeathZoneSourceCallback = (x: number, y: number)=>void;
 
-declare type DeathZoneSource = {
+declare interface DeathZoneSource {
     contains: DeathZoneSourceCallback;
-};
+}
 
 declare type EdgeZoneSourceCallback = (quantity: integer, stepRate?: number)=>void;
 
-declare type EdgeZoneSource = {
+declare interface EdgeZoneSource {
     /**
      * A function placing points on the source's edge or edges.
      */
     getPoints: EdgeZoneSourceCallback;
-};
+}
 
 declare type RandomZoneSourceCallback = (point: Phaser.Math.Vector2)=>void;
 
-declare type RandomZoneSource = {
+declare interface RandomZoneSource {
     /**
      * A function modifying its point argument.
      */
     getRandomPoint: RandomZoneSourceCallback;
-};
+}
 
 /**
  * Settings for a PathFollower.
  */
-declare type PathConfig = {
+declare interface PathConfig {
     /**
      * The duration of the path follow.
      */
@@ -2457,9 +2457,9 @@ declare type PathConfig = {
      * [description]
      */
     verticalAdjust?: boolean;
-};
+}
 
-declare type RenderTextureConfig = {
+declare interface RenderTextureConfig {
     /**
      * The x coordinate of the RenderTexture's position.
      */
@@ -2476,7 +2476,7 @@ declare type RenderTextureConfig = {
      * The height of the RenderTexture.
      */
     height?: number;
-};
+}
 
 declare type SpriteConfig = GameObjectConfig & {
     /**
@@ -2497,7 +2497,7 @@ declare type TextStyleWordWrapCallback = (text: string, textObject: Phaser.GameO
 /**
  * Font metrics for a Text Style object.
  */
-declare type BitmapTextMetrics = {
+declare interface BitmapTextMetrics {
     /**
      * The ascent of the font.
      */
@@ -2510,7 +2510,7 @@ declare type BitmapTextMetrics = {
      * The size of the font.
      */
     fontSize: number;
-};
+}
 
 declare namespace Phaser.GameObjects.Text {
     /**
@@ -2892,7 +2892,7 @@ declare type CenterFunction = (triangle: Phaser.Geom.Triangle)=>void;
 
 declare type HitAreaCallback = (hitArea: any, x: number, y: number, gameObject: Phaser.GameObjects.GameObject)=>void;
 
-declare type Pad = {
+declare interface Pad {
     /**
      * The ID of the Gamepad.
      */
@@ -2901,9 +2901,9 @@ declare type Pad = {
      * The index of the Gamepad.
      */
     index: integer;
-};
+}
 
-declare type InputPluginContainer = {
+declare interface InputPluginContainer {
     /**
      * The unique name of this plugin in the input plugin cache.
      */
@@ -2916,7 +2916,7 @@ declare type InputPluginContainer = {
      * If this plugin is to be injected into the Input Plugin, this is the property key map used.
      */
     mapping?: string;
-};
+}
 
 declare namespace Phaser.Input.InputPluginCache {
     /**
@@ -2954,7 +2954,7 @@ declare namespace Phaser.Input.InputPluginCache {
 
 declare type KeyboardKeydownCallback = (event: KeyboardEvent)=>void;
 
-declare type KeyComboConfig = {
+declare interface KeyComboConfig {
     /**
      * If they press the wrong key do we reset the combo?
      */
@@ -2971,9 +2971,9 @@ declare type KeyComboConfig = {
      * If the combo matches, will it delete itself?
      */
     deleteOnMatch?: boolean;
-};
+}
 
-declare type FileConfig = {
+declare interface FileConfig {
     /**
      * The file type string (image, json, etc) for sorting within the Loader.
      */
@@ -3006,7 +3006,7 @@ declare type FileConfig = {
      * A config object that can be used by file types to store transitional data.
      */
     config?: any;
-};
+}
 
 declare namespace Phaser.Loader.AudioSpriteFile {
     /**
@@ -3039,7 +3039,7 @@ declare namespace Phaser.Loader.FileTypesManager {
 
 }
 
-declare type XHRSettingsObject = {
+declare interface XHRSettingsObject {
     /**
      * The response type of the XHR request, i.e. `blob`, `text`, etc.
      */
@@ -3076,9 +3076,9 @@ declare type XHRSettingsObject = {
      * Provide a custom mime-type to use instead of the default.
      */
     overrideMimeType?: string | undefined;
-};
+}
 
-declare type SinCosTable = {
+declare interface SinCosTable {
     /**
      * The sine value.
      */
@@ -3091,9 +3091,9 @@ declare type SinCosTable = {
      * The length.
      */
     length: number;
-};
+}
 
-declare type Vector2Like = {
+declare interface Vector2Like {
     /**
      * The x component.
      */
@@ -3102,7 +3102,7 @@ declare type Vector2Like = {
      * The y component.
      */
     y: number;
-};
+}
 
 declare namespace Phaser {
     namespace Actions {
@@ -8379,7 +8379,7 @@ declare namespace Phaser {
          * They are then referenced by internal game systems and are available for you to access
          * via `this.sys.game.device.audio` from within any Scene.
          */
-        type Audio = {
+        interface Audio {
             /**
              * Can this device play HTML Audio tags?
              */
@@ -8416,7 +8416,7 @@ declare namespace Phaser {
              * Can this device play webm files?
              */
             webm: boolean;
-        };
+        }
 
         /**
          * Determines the browser type and version running this Phaser Game instance.
@@ -8424,7 +8424,7 @@ declare namespace Phaser {
          * They are then referenced by internal game systems and are available for you to access
          * via `this.sys.game.device.browser` from within any Scene.
          */
-        type Browser = {
+        interface Browser {
             /**
              * Set to true if running in Chrome.
              */
@@ -8481,7 +8481,7 @@ declare namespace Phaser {
              * If running in Internet Explorer 11 this will contain the major version number. See {@link http://msdn.microsoft.com/en-us/library/ie/ms537503(v=vs.85).aspx}
              */
             tridentVersion: number;
-        };
+        }
 
         /**
          * Determines the canvas features of the browser running this Phaser Game instance.
@@ -8489,7 +8489,7 @@ declare namespace Phaser {
          * They are then referenced by internal game systems and are available for you to access
          * via `this.sys.game.device.canvasFeatures` from within any Scene.
          */
-        type CanvasFeatures = {
+        interface CanvasFeatures {
             /**
              * Set to true if the browser supports inversed alpha.
              */
@@ -8498,7 +8498,7 @@ declare namespace Phaser {
              * Set to true if the browser supports new canvas blend modes.
              */
             supportNewBlendModes: boolean;
-        };
+        }
 
         /**
          * Determines the features of the browser running this Phaser Game instance.
@@ -8506,7 +8506,7 @@ declare namespace Phaser {
          * They are then referenced by internal game systems and are available for you to access
          * via `this.sys.game.device.features` from within any Scene.
          */
-        type Features = {
+        interface Features {
             /**
              * True if canvas supports a 'copy' bitblt onto itself when the source and destination regions overlap.
              */
@@ -8555,7 +8555,7 @@ declare namespace Phaser {
              * Is worker available?
              */
             worker: boolean;
-        };
+        }
 
         /**
          * Determines the full screen support of the browser running this Phaser Game instance.
@@ -8563,7 +8563,7 @@ declare namespace Phaser {
          * They are then referenced by internal game systems and are available for you to access
          * via `this.sys.game.device.fullscreen` from within any Scene.
          */
-        type Fullscreen = {
+        interface Fullscreen {
             /**
              * Does the browser support the Full Screen API?
              */
@@ -8580,7 +8580,7 @@ declare namespace Phaser {
              * If the browser supports the Full Screen API this holds the call you need to use to activate it.
              */
             request: string;
-        };
+        }
 
         /**
          * Determines the input support of the browser running this Phaser Game instance.
@@ -8588,7 +8588,7 @@ declare namespace Phaser {
          * They are then referenced by internal game systems and are available for you to access
          * via `this.sys.game.device.input` from within any Scene.
          */
-        type Input = {
+        interface Input {
             /**
              * The newest type of Wheel/Scroll event supported: 'wheel', 'mousewheel', 'DOMMouseScroll'
              */
@@ -8605,7 +8605,7 @@ declare namespace Phaser {
              * Is touch available?
              */
             touch: boolean;
-        };
+        }
 
         /**
          * Determines the operating system of the device running this Phaser Game instance.
@@ -8613,7 +8613,7 @@ declare namespace Phaser {
          * They are then referenced by internal game systems and are available for you to access
          * via `this.sys.game.device.os` from within any Scene.
          */
-        type OS = {
+        interface OS {
             /**
              * Is running on android?
              */
@@ -8702,7 +8702,7 @@ declare namespace Phaser {
              * PixelRatio of the host device?
              */
             pixelRatio: number;
-        };
+        }
 
         /**
          * Determines the video support of the browser running this Phaser Game instance.
@@ -8710,7 +8710,7 @@ declare namespace Phaser {
          * They are then referenced by internal game systems and are available for you to access
          * via `this.sys.game.device.video` from within any Scene.
          */
-        type Video = {
+        interface Video {
             /**
              * Can this device play h264 mp4 video files?
              */
@@ -8735,11 +8735,11 @@ declare namespace Phaser {
              * Can this device play webm video files?
              */
             webmVideo: boolean;
-        };
+        }
 
     }
 
-    type DeviceConf = {
+    interface DeviceConf {
         /**
          * The OS Device functions.
          */
@@ -8772,7 +8772,7 @@ declare namespace Phaser {
          * The Canvas Device functions.
          */
         canvasFeatures: Phaser.Device.CanvasFeatures;
-    };
+    }
 
     namespace Display {
         namespace Align {
@@ -10762,7 +10762,7 @@ declare namespace Phaser {
              */
             function Parse(scene: Phaser.Scene, config: Phaser.GameObjects.RetroFont.Config): object;
 
-            type Config = {
+            interface Config {
                 /**
                  * The key of the image containing the font.
                  */
@@ -10803,7 +10803,7 @@ declare namespace Phaser {
                  * The amount of vertical space to add to the line height of the font.
                  */
                 lineSpacing: number;
-            };
+            }
 
         }
 
@@ -37143,7 +37143,7 @@ declare namespace Phaser {
          */
         var POINTER_LOCK_CHANGE: integer;
 
-        type InteractiveObject = {
+        interface InteractiveObject {
             /**
              * The Game Object to which this Interactive Object is bound.
              */
@@ -37208,7 +37208,7 @@ declare namespace Phaser {
              * The y coordinate that this Interactive Object is currently being dragged to.
              */
             dragY: number;
-        };
+        }
 
         /**
          * Creates a new Interactive Object.
@@ -38624,7 +38624,7 @@ declare namespace Phaser {
 
         }
 
-        type InputConfiguration = {
+        interface InputConfiguration {
             /**
              * The object / shape to use as the Hit Area. If not given it will try to create a Rectangle based on the texture frame.
              */
@@ -38657,7 +38657,7 @@ declare namespace Phaser {
              * If `pixelPerfect` is set, this is the alpha tolerance threshold value used in the callback.
              */
             alphaTolerance?: integer;
-        };
+        }
 
         namespace Keyboard {
             /**
@@ -38960,7 +38960,7 @@ declare namespace Phaser {
 
             }
 
-            type CursorKeys = {
+            interface CursorKeys {
                 /**
                  * A Key object mapping to the UP arrow key.
                  */
@@ -38985,7 +38985,7 @@ declare namespace Phaser {
                  * A Key object mapping to the SHIFT key.
                  */
                 shift?: Phaser.Input.Keyboard.Key;
-            };
+            }
 
             /**
              * Returns `true` if the Key was pressed down within the `duration` value given, or `false` if it either isn't down,
@@ -40009,7 +40009,7 @@ declare namespace Phaser {
 
             }
 
-            type AtlasJSONFileConfig = {
+            interface AtlasJSONFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Texture Manager.
                  */
@@ -40042,7 +40042,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for the atlas json file.
                  */
                 atlasXhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single JSON based Texture Atlas File suitable for loading by the Loader.
@@ -40072,7 +40072,7 @@ declare namespace Phaser {
 
             }
 
-            type AtlasXMLFileConfig = {
+            interface AtlasXMLFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Texture Manager.
                  */
@@ -40105,7 +40105,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for the atlas xml file.
                  */
                 atlasXhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single XML based Texture Atlas File suitable for loading by the Loader.
@@ -40133,7 +40133,7 @@ declare namespace Phaser {
 
             }
 
-            type AudioFileConfig = {
+            interface AudioFileConfig {
                 /**
                  * The key of the file. Must be unique within the Loader and Audio Cache.
                  */
@@ -40150,7 +40150,7 @@ declare namespace Phaser {
                  * The AudioContext this file will use to process itself.
                  */
                 audioContext?: AudioContext;
-            };
+            }
 
             /**
              * A single Audio File suitable for loading by the Loader.
@@ -40178,7 +40178,7 @@ declare namespace Phaser {
 
             }
 
-            type AudioSpriteFileConfig = {
+            interface AudioSpriteFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Audio Cache.
                  */
@@ -40203,7 +40203,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for the audio file.
                  */
                 audioXhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * An Audio Sprite File suitable for loading by the Loader.
@@ -40227,7 +40227,7 @@ declare namespace Phaser {
 
             }
 
-            type BinaryFileConfig = {
+            interface BinaryFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Binary Cache.
                  */
@@ -40248,7 +40248,7 @@ declare namespace Phaser {
                  * Optional type to cast the binary file to once loaded. For example, `Uint8Array`.
                  */
                 dataType?: any;
-            };
+            }
 
             /**
              * A single Binary File suitable for loading by the Loader.
@@ -40276,7 +40276,7 @@ declare namespace Phaser {
 
             }
 
-            type BitmapFontFileConfig = {
+            interface BitmapFontFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Texture Manager.
                  */
@@ -40309,7 +40309,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for the font data xml file.
                  */
                 fontDataXhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single Bitmap Font based File suitable for loading by the Loader.
@@ -40337,7 +40337,7 @@ declare namespace Phaser {
 
             }
 
-            type GLSLFileConfig = {
+            interface GLSLFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Text Cache.
                  */
@@ -40354,7 +40354,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for this file.
                  */
                 xhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single GLSL File suitable for loading by the Loader.
@@ -40422,7 +40422,7 @@ declare namespace Phaser {
 
             }
 
-            type HTMLFileConfig = {
+            interface HTMLFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Text Cache.
                  */
@@ -40439,7 +40439,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for this file.
                  */
                 xhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single HTML File suitable for loading by the Loader.
@@ -40466,7 +40466,7 @@ declare namespace Phaser {
 
             }
 
-            type HTMLTextureFileConfig = {
+            interface HTMLTextureFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Texture Manager.
                  */
@@ -40491,7 +40491,7 @@ declare namespace Phaser {
                  * The height of the texture the HTML will be rendered to.
                  */
                 height?: integer;
-            };
+            }
 
             /**
              * A single HTML File suitable for loading by the Loader.
@@ -40525,7 +40525,7 @@ declare namespace Phaser {
 
             }
 
-            type ImageFrameConfig = {
+            interface ImageFrameConfig {
                 /**
                  * The width of the frame in pixels.
                  */
@@ -40550,9 +40550,9 @@ declare namespace Phaser {
                  * The spacing between each frame in the image.
                  */
                 spacing?: integer;
-            };
+            }
 
-            type ImageFileConfig = {
+            interface ImageFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Texture Manager.
                  */
@@ -40577,7 +40577,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for this file.
                  */
                 xhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single Image File suitable for loading by the Loader.
@@ -40610,7 +40610,7 @@ declare namespace Phaser {
 
             }
 
-            type JSONFileConfig = {
+            interface JSONFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the JSON Cache.
                  */
@@ -40631,7 +40631,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for this file.
                  */
                 xhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single JSON File suitable for loading by the Loader.
@@ -40659,7 +40659,7 @@ declare namespace Phaser {
 
             }
 
-            type MultiAtlasFileConfig = {
+            interface MultiAtlasFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Texture Manager.
                  */
@@ -40688,7 +40688,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for the texture files.
                  */
                 textureXhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single Multi Texture Atlas File suitable for loading by the Loader.
@@ -40712,7 +40712,7 @@ declare namespace Phaser {
 
             }
 
-            type PackFileConfig = {
+            interface PackFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the JSON Cache.
                  */
@@ -40733,7 +40733,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for this file.
                  */
                 xhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single JSON Pack File suitable for loading by the Loader.
@@ -40761,7 +40761,7 @@ declare namespace Phaser {
 
             }
 
-            type PluginFileConfig = {
+            interface PluginFileConfig {
                 /**
                  * The key of the file. Must be unique within the Loader.
                  */
@@ -40786,7 +40786,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for this file.
                  */
                 xhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single Plugin Script File suitable for loading by the Loader.
@@ -40815,7 +40815,7 @@ declare namespace Phaser {
 
             }
 
-            type ScenePluginFileConfig = {
+            interface ScenePluginFileConfig {
                 /**
                  * The key of the file. Must be unique within the Loader.
                  */
@@ -40840,7 +40840,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for this file.
                  */
                 xhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single Scene Plugin Script File suitable for loading by the Loader.
@@ -40869,7 +40869,7 @@ declare namespace Phaser {
 
             }
 
-            type ScriptFileConfig = {
+            interface ScriptFileConfig {
                 /**
                  * The key of the file. Must be unique within the Loader.
                  */
@@ -40886,7 +40886,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for this file.
                  */
                 xhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single Script File suitable for loading by the Loader.
@@ -40913,7 +40913,7 @@ declare namespace Phaser {
 
             }
 
-            type SpriteSheetFileConfig = {
+            interface SpriteSheetFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Texture Manager.
                  */
@@ -40938,7 +40938,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for this file.
                  */
                 xhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single Sprite Sheet Image File suitable for loading by the Loader.
@@ -40965,7 +40965,7 @@ declare namespace Phaser {
 
             }
 
-            type SVGSizeConfig = {
+            interface SVGSizeConfig {
                 /**
                  * An optional width. The SVG will be resized to this size before being rendered to a texture.
                  */
@@ -40978,9 +40978,9 @@ declare namespace Phaser {
                  * An optional scale. If given it overrides the width / height properties. The SVG is scaled by the scale factor before being rendered to a texture.
                  */
                 scale?: number;
-            };
+            }
 
-            type SVGFileConfig = {
+            interface SVGFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Texture Manager.
                  */
@@ -41001,7 +41001,7 @@ declare namespace Phaser {
                  * The svg size configuration object.
                  */
                 svgConfig?: Phaser.Loader.FileTypes.SVGSizeConfig;
-            };
+            }
 
             /**
              * A single SVG File suitable for loading by the Loader.
@@ -41034,7 +41034,7 @@ declare namespace Phaser {
 
             }
 
-            type TextFileConfig = {
+            interface TextFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Text Cache.
                  */
@@ -41051,7 +41051,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for this file.
                  */
                 xhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single Text File suitable for loading by the Loader.
@@ -41078,7 +41078,7 @@ declare namespace Phaser {
 
             }
 
-            type TilemapCSVFileConfig = {
+            interface TilemapCSVFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Tilemap Cache.
                  */
@@ -41095,7 +41095,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for this file.
                  */
                 xhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single Tilemap CSV File suitable for loading by the Loader.
@@ -41127,7 +41127,7 @@ declare namespace Phaser {
 
             }
 
-            type TilemapImpactFileConfig = {
+            interface TilemapImpactFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Tilemap Cache.
                  */
@@ -41144,7 +41144,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for this file.
                  */
                 xhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single Impact.js Tilemap JSON File suitable for loading by the Loader.
@@ -41170,7 +41170,7 @@ declare namespace Phaser {
 
             }
 
-            type TilemapJSONFileConfig = {
+            interface TilemapJSONFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Tilemap Cache.
                  */
@@ -41187,7 +41187,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for this file.
                  */
                 xhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single Tiled Tilemap JSON File suitable for loading by the Loader.
@@ -41213,7 +41213,7 @@ declare namespace Phaser {
 
             }
 
-            type UnityAtlasFileConfig = {
+            interface UnityAtlasFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Texture Manager.
                  */
@@ -41246,7 +41246,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for the atlas data file.
                  */
                 atlasXhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single text file based Unity Texture Atlas File suitable for loading by the Loader.
@@ -41274,7 +41274,7 @@ declare namespace Phaser {
 
             }
 
-            type XMLFileConfig = {
+            interface XMLFileConfig {
                 /**
                  * The key of the file. Must be unique within both the Loader and the Text Cache.
                  */
@@ -41291,7 +41291,7 @@ declare namespace Phaser {
                  * Extra XHR Settings specifically for this file.
                  */
                 xhrSettings?: XHRSettingsObject;
-            };
+            }
 
             /**
              * A single XML File suitable for loading by the Loader.
@@ -53954,7 +53954,7 @@ declare namespace Phaser {
              */
             function UpdateMotion(body: Phaser.Physics.Impact.Body, res: object): void;
 
-            type WorldConfig = {
+            interface WorldConfig {
                 /**
                  * Sets {@link Phaser.Physics.Impact.World#gravity}
                  */
@@ -54055,12 +54055,12 @@ declare namespace Phaser {
                  * Should the bottom world bounds wall be created?
                  */
                 "setBounds.bottom"?: boolean;
-            };
+            }
 
             /**
              * An object containing the 4 wall bodies that bound the physics world.
              */
-            type WorldDefaults = {
+            interface WorldDefaults {
                 /**
                  * Whether the Body's boundary is drawn to the debug display.
                  */
@@ -54097,9 +54097,9 @@ declare namespace Phaser {
                  * The default bounce, or restitution, of bodies in the world.
                  */
                 bounciness: number;
-            };
+            }
 
-            type WorldWalls = {
+            interface WorldWalls {
                 /**
                  * The left-side wall of the world bounds.
                  */
@@ -54116,7 +54116,7 @@ declare namespace Phaser {
                  * The bottom wall of the world bounds.
                  */
                 bottom: Phaser.Physics.Impact.Body;
-            };
+            }
 
             /**
              * [description]
@@ -57902,7 +57902,7 @@ declare namespace Phaser {
 
         }
 
-        type DefaultPlugins = {
+        interface DefaultPlugins {
             /**
              * These are the Global Managers that are created by the Phaser.Game instance.
              */
@@ -57915,7 +57915,7 @@ declare namespace Phaser {
              * These plugins are created in Scene.Systems in addition to the CoreScenePlugins.
              */
             DefaultScene: any[];
-        };
+        }
 
         /**
          * These are the Global Managers that are created by the Phaser.Game instance.
@@ -60604,7 +60604,7 @@ declare namespace Phaser {
         }
 
         namespace Settings {
-            type Config = {
+            interface Config {
                 /**
                  * [description]
                  */
@@ -60645,9 +60645,9 @@ declare namespace Phaser {
                  * [description]
                  */
                 plugins?: false | any;
-            };
+            }
 
-            type Object = {
+            interface Object {
                 /**
                  * [description]
                  */
@@ -60712,7 +60712,7 @@ declare namespace Phaser {
                  * [description]
                  */
                 plugins: false | any;
-            };
+            }
 
             /**
              * Takes a Scene configuration object and returns a fully formed Systems object.
@@ -68598,7 +68598,7 @@ declare namespace Phaser {
          */
         var REMOVED: integer;
 
-        type TweenConfigDefaults = {
+        interface TweenConfigDefaults {
             /**
              * The object, or an array of objects, to run the tween on.
              */
@@ -68643,7 +68643,7 @@ declare namespace Phaser {
              * Vertically flip the target of the Tween when it completes (before it yoyos, if set to do so). Only works for targets that support the `flipY` property.
              */
             flipY?: boolean;
-        };
+        }
 
         /**
          * [description]
@@ -68927,7 +68927,7 @@ declare namespace Phaser {
 
         }
 
-        type TweenDataConfig = {
+        interface TweenDataConfig {
             /**
              * The target to tween.
              */
@@ -69024,7 +69024,7 @@ declare namespace Phaser {
              * TWEEN_CONST.CREATED
              */
             state?: integer;
-        };
+        }
 
         /**
          * [description]
@@ -70437,7 +70437,7 @@ declare namespace Phaser {
 
 }
 
-declare type ArcadeBodyBounds = {
+declare interface ArcadeBodyBounds {
     /**
      * The left edge.
      */
@@ -70454,9 +70454,9 @@ declare type ArcadeBodyBounds = {
      * The lower edge.
      */
     bottom: number;
-};
+}
 
-declare type ArcadeBodyCollision = {
+declare interface ArcadeBodyCollision {
     /**
      * True if the Body is not colliding.
      */
@@ -70477,7 +70477,7 @@ declare type ArcadeBodyCollision = {
      * True if the Body is colliding on its right edge.
      */
     right: boolean;
-};
+}
 
 declare type ArcadePhysicsCallback = (object1: Phaser.GameObjects.GameObject, object2: Phaser.GameObjects.GameObject)=>void;
 
@@ -70572,7 +70572,7 @@ declare type PhysicsGroupConfig = GroupConfig & {
     immovable?: boolean;
 };
 
-declare type PhysicsGroupDefaults = {
+declare interface PhysicsGroupDefaults {
     /**
      * As {@link Phaser.Physics.Arcade.Body#setCollideWorldBounds}.
      */
@@ -70661,9 +70661,9 @@ declare type PhysicsGroupDefaults = {
      * As {@link Phaser.Physics.Arcade.Body#setImmovable}.
      */
     setImmovable: boolean;
-};
+}
 
-declare type ArcadeWorldConfig = {
+declare interface ArcadeWorldConfig {
     /**
      * Sets {@link Phaser.Physics.Arcade.World#fps}.
      */
@@ -70772,9 +70772,9 @@ declare type ArcadeWorldConfig = {
      * Sets {@link Phaser.Physics.Arcade.World#useTree}.
      */
     useTree?: boolean;
-};
+}
 
-declare type CheckCollisionObject = {
+declare interface CheckCollisionObject {
     /**
      * [description]
      */
@@ -70791,9 +70791,9 @@ declare type CheckCollisionObject = {
      * [description]
      */
     right: boolean;
-};
+}
 
-declare type ArcadeWorldDefaults = {
+declare interface ArcadeWorldDefaults {
     /**
      * [description]
      */
@@ -70818,9 +70818,9 @@ declare type ArcadeWorldDefaults = {
      * [description]
      */
     velocityDebugColor: number;
-};
+}
 
-declare type ArcadeWorldTreeMinMax = {
+declare interface ArcadeWorldTreeMinMax {
     /**
      * [description]
      */
@@ -70837,7 +70837,7 @@ declare type ArcadeWorldTreeMinMax = {
      * [description]
      */
     maxY: number;
-};
+}
 
 /**
  * An Arcade Physics Collider Type.
@@ -70846,7 +70846,7 @@ declare type ArcadeColliderType = ()=>void;
 
 declare type BodyUpdateCallback = (body: Phaser.Physics.Impact.Body)=>void;
 
-declare type JSONImpactBody = {
+declare interface JSONImpactBody {
     /**
      * [description]
      */
@@ -70899,7 +70899,7 @@ declare type JSONImpactBody = {
      * [description]
      */
     collides: Phaser.Physics.Impact.COLLIDES;
-};
+}
 
 declare type CollideCallback = (body: Phaser.Physics.Impact.Body, other: Phaser.Physics.Impact.Body, axis: string)=>void;
 
@@ -70956,7 +70956,7 @@ declare namespace MatterJS {
 
 }
 
-declare type CorePluginContainer = {
+declare interface CorePluginContainer {
     /**
      * The unique name of this plugin in the core plugin cache.
      */
@@ -70973,9 +70973,9 @@ declare type CorePluginContainer = {
      * Core Scene plugin or a Custom Scene plugin?
      */
     custom?: boolean;
-};
+}
 
-declare type CustomPluginContainer = {
+declare interface CustomPluginContainer {
     /**
      * The unique name of this plugin in the custom plugin cache.
      */
@@ -70984,7 +70984,7 @@ declare type CustomPluginContainer = {
      * The plugin to be stored. Should be the source object, not instantiated.
      */
     plugin: Function;
-};
+}
 
 declare namespace Phaser.Plugins.PluginCache {
     /**
@@ -71066,7 +71066,7 @@ declare namespace Phaser.Plugins.PluginCache {
 
 }
 
-declare type GlobalPlugin = {
+declare interface GlobalPlugin {
     /**
      * The unique name of this plugin within the plugin cache.
      */
@@ -71083,9 +71083,9 @@ declare type GlobalPlugin = {
      * If this plugin is to be injected into the Scene Systems, this is the property key map used.
      */
     mapping?: string;
-};
+}
 
-declare type RendererConfig = {
+declare interface RendererConfig {
     /**
      * [description]
      */
@@ -71110,7 +71110,7 @@ declare type RendererConfig = {
      * [description]
      */
     roundPixels: boolean;
-};
+}
 
 declare type SnapshotCallback = (snapshot: HTMLImageElement)=>void;
 
@@ -71223,7 +71223,7 @@ declare interface ModelViewProjection {
 
 declare type WebGLContextCallback = (renderer: Phaser.Renderer.WebGL.WebGLRenderer)=>void;
 
-declare type SnapshotState = {
+declare interface SnapshotState {
     /**
      * The function to call after the snapshot is taken.
      */
@@ -71236,10 +71236,10 @@ declare type SnapshotState = {
      * The image quality, between 0 and 1, for image formats which use lossy compression (such as `image/jpeg`).
      */
     encoder: number;
-};
+}
 
 declare namespace Phaser.Scenes.ScenePlugin {
-    type SceneTransitionConfig = {
+    interface SceneTransitionConfig {
         /**
          * The Scene key to transition to.
          */
@@ -71276,7 +71276,7 @@ declare namespace Phaser.Scenes.ScenePlugin {
          * An object containing any data you wish to be passed to the target Scenes init / create methods.
          */
         data?: any;
-    };
+    }
 
 }
 
@@ -71293,7 +71293,7 @@ declare namespace Phaser.Sound.BaseSound {
 /**
  * Config object containing various sound settings.
  */
-declare type SoundConfig = {
+declare interface SoundConfig {
     /**
      * Boolean indicating whether the sound should be muted or not.
      */
@@ -71322,12 +71322,12 @@ declare type SoundConfig = {
      * Time, in seconds, that should elapse before the sound actually starts its playback.
      */
     delay?: number;
-};
+}
 
 /**
  * Marked section of a sound represented by name, and optionally start time, duration, and config object.
  */
-declare type SoundMarker = {
+declare interface SoundMarker {
     /**
      * Unique identifier of a sound marker.
      */
@@ -71344,7 +71344,7 @@ declare type SoundMarker = {
      * An optional config object containing default marker settings.
      */
     config?: SoundConfig;
-};
+}
 
 declare type EachListCallback<I> = (item: any, ...args: any[])=>void;
 
@@ -71354,7 +71354,7 @@ declare type EachSetCallback<E> = (entry: any, index: number)=>void;
 
 declare type EachTextureCallback = (texture: Phaser.Textures.Texture, ...args: any[])=>void;
 
-declare type SpriteSheetConfig = {
+declare interface SpriteSheetConfig {
     /**
      * The fixed width of each frame.
      */
@@ -71379,9 +71379,9 @@ declare type SpriteSheetConfig = {
      * If the frames have been drawn with spacing between them, specify the amount here.
      */
     spacing?: integer;
-};
+}
 
-declare type SpriteSheetFromAtlasConfig = {
+declare interface SpriteSheetFromAtlasConfig {
     /**
      * The key of the Texture Atlas in which this Sprite Sheet can be found.
      */
@@ -71414,13 +71414,13 @@ declare type SpriteSheetFromAtlasConfig = {
      * If the frames have been drawn with spacing between them, specify the amount here.
      */
     spacing?: integer;
-};
+}
 
 declare type FindTileCallback = (value: Phaser.Tilemaps.Tile, index: integer, array: Phaser.Tilemaps.Tile[])=>void;
 
 declare type EachTileCallback = (value: Phaser.Tilemaps.Tile, index: integer, array: Phaser.Tilemaps.Tile[])=>void;
 
-declare type GetTilesWithinFilteringOptions = {
+declare interface GetTilesWithinFilteringOptions {
     /**
      * If true, only return tiles that don't have -1 for an index.
      */
@@ -71433,13 +71433,13 @@ declare type GetTilesWithinFilteringOptions = {
      * If true, only return tiles that have at least one interesting face.
      */
     hasInterestingFace?: boolean;
-};
+}
 
 declare type TilemapFilterCallback = (value: Phaser.GameObjects.GameObject, index: number, array: Phaser.GameObjects.GameObject[])=>void;
 
 declare type TilemapFindCallback = (value: Phaser.GameObjects.GameObject, index: number, array: Phaser.GameObjects.GameObject[])=>void;
 
-declare type TilemapConfig = {
+declare interface TilemapConfig {
     /**
      * The key in the Phaser cache that corresponds to the loaded tilemap data.
      */
@@ -71473,9 +71473,9 @@ declare type TilemapConfig = {
      * then leave the default value set.
      */
     insertNull?: boolean;
-};
+}
 
-declare type TimerEventConfig = {
+declare interface TimerEventConfig {
     /**
      * [description]
      */
@@ -71512,9 +71512,9 @@ declare type TimerEventConfig = {
      * [description]
      */
     paused?: boolean;
-};
+}
 
-declare type TweenDataGenConfig = {
+declare interface TweenDataGenConfig {
     /**
      * [description]
      */
@@ -71535,7 +71535,7 @@ declare type TweenDataGenConfig = {
      * [description]
      */
     repeatDelay: Function;
-};
+}
 
 /**
  * Class
@@ -71642,7 +71642,7 @@ declare namespace Phaser.Utils.Objects {
 
 }
 
-declare type AdInstance = {
+declare interface AdInstance {
     /**
      * Represents an instance of an ad.
      */
@@ -71659,7 +71659,7 @@ declare type AdInstance = {
      * Is this a video ad?
      */
     video: boolean;
-};
+}
 
 declare namespace Phaser.FacebookInstantGamesPlugin {
     /**
@@ -71760,7 +71760,7 @@ declare namespace Phaser.FacebookInstantGamesPlugin {
 
 }
 
-declare type LeaderboardScore = {
+declare interface LeaderboardScore {
     /**
      * An integer score value.
      */
@@ -71793,9 +71793,9 @@ declare type LeaderboardScore = {
      * The game's unique identifier for the player.
      */
     playerID: string;
-};
+}
 
-declare type Product = {
+declare interface Product {
     /**
      * The title of the product.
      */
@@ -71820,9 +71820,9 @@ declare type Product = {
      * The currency code for the product.
      */
     priceCurrencyCode?: string;
-};
+}
 
-declare type Purchase = {
+declare interface Purchase {
     /**
      * A developer-specified string, provided during the purchase of the product.
      */
@@ -71847,7 +71847,7 @@ declare type Purchase = {
      * Server-signed encoding of the purchase request.
      */
     signedRequest?: string;
-};
+}
 
 declare type integer = number;
 
