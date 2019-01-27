@@ -23,7 +23,6 @@ export class Game {
     scene.load.image('grassfun1', 'img/grassfun1.jpg');
     scene.load.image('grassfun2', 'img/grassfun2.jpg');
     scene.load.image('grassfun3', 'img/grassfun3.jpg');
-    scene.load.image('poptart', 'img/poptart.png');
     scene.load.image('poptartbox', 'img/poptartbox.png');
     scene.load.image('shower', 'img/shower.png');
     scene.load.image('smiley', 'img/smiley.png');
