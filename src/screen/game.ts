@@ -1,21 +1,26 @@
 import Phaser = require('phaser');
 import { ControllerStateMap } from './controllerstate/controllerstatemap';
 import { Item } from './item/item';
-import { ItemType } from './item/itemtype';
+import { Cookable, Cookware, ItemStateMachine, Shower } from './item/itemstate';
+import { euclideanDistance } from './location';
 import { Player } from './player';
 import { World } from './world';
+
+const interactionRadius = 40;
 
 export class Game {
   private controllerStateMap: ControllerStateMap;
   private playerMap: Map<number, Player>;
   private phaserGame: Phaser.Game | null;
   private world: World | null;
+  private items: ItemStateMachine[];
 
   private constructor(controllerStateMap: ControllerStateMap) {
     this.controllerStateMap = controllerStateMap;
     this.playerMap = new Map();
     this.phaserGame = null;
     this.world = null;
+    this.items = [];
   }
 
   preload(scene: Phaser.Scene): void {
@@ -49,33 +54,73 @@ export class Game {
       this.playerMap.set(deviceIds[i], new Player(this.world, sprite));
     }
 
-    new Item(
-        ItemType.POPTART_BOX,
-        scene.add.sprite(900, 600, 'poptartbox'),
-        {
-          width: 50,
-          height: 50
-        });
-    new Item(
-        ItemType.SHOWER,
-        scene.add.sprite(700, 300, 'shower'),
-        {
-          width: 80,
-          height: 100
-        });
-    new Item(
-        ItemType.TOASTER,
-        scene.add.sprite(900, 400, 'toaster'),
-        {
-          width: 50,
-          height: 50
-        });
+    this.items = [
+      new Shower(
+        new Item(
+          scene.add.sprite(700, 300, 'shower'),
+          {
+            width: 80,
+            height: 100
+          })),
+      new Cookable(2000, 15000,
+        new Item(
+          scene.add.sprite(900, 600, 'poptartbox'),
+          {
+            width: 50,
+            height: 50
+          })),
+      new Cookware(
+        new Item(
+          scene.add.sprite(900, 400, 'toaster'),
+          {
+            width: 50,
+            height: 50
+          })
+      )
+    ];
   }
 
 
   update(scene: Phaser.Scene): void {
     this.controllerStateMap.forEach((state, deviceId) => {
-      this.playerMap.get(deviceId)!.update(state);
+      const player = this.playerMap.get(deviceId)!;
+      player.update(state);
+      if (player.item !== null) {
+        console.log('move item');
+        player.item.move(player.getLocation());
+      }
+
+      if (state.isActionPressed()) {
+        const closestItems = this.items.sort((item1, item2) =>
+          euclideanDistance(
+            item1.getLocation(),
+            player.getLocation()) -
+          euclideanDistance(item2.getLocation(),
+            player.getLocation())
+        )
+          .filter((item) =>
+            euclideanDistance(
+              item.getLocation(),
+              player.getLocation()) < interactionRadius);
+
+        if (closestItems.length == 1) {
+          closestItems[0].interact(player);
+        } else if (closestItems.length == 2) {
+          if (closestItems[0] === player.item) {
+            closestItems[1].interact(player);
+
+            if (player.item === closestItems[0]) {
+              closestItems[0].interact(player);
+            }
+          } else {
+            closestItems[0].interact(player);
+          }
+        }
+      }
+    });
+
+    this.items.forEach((item) => {
+      item.update(1 / 60 * 1000);
     });
   }
 

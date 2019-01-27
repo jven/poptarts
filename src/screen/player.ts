@@ -1,4 +1,6 @@
 import { ControllerState } from './controllerstate/controllerstate';
+import { ItemStateMachine } from './item/itemstate';
+import { Location } from './location';
 import { World } from './world';
 
 const SPEED = 5;
@@ -6,25 +8,37 @@ const SPEED = 5;
 export class Player {
   private world: World;
   private sprite: Phaser.Physics.Arcade.Sprite;
+  public item: ItemStateMachine | null;
+  private currentSpeed: number;
 
   constructor(world: World, sprite: Phaser.Physics.Arcade.Sprite) {
     this.world = world;
     this.sprite = sprite;
     this.sprite.displayWidth = 50;
     this.sprite.displayHeight = 50;
+    this.item = null;
+    this.currentSpeed = SPEED;
+  }
+
+  immobilize() {
+    this.currentSpeed = 0;
+  }
+
+  mobilize() {
+    this.currentSpeed = SPEED;
   }
 
   update(controllerState: ControllerState): void {
     let dx = 0;
     let dy = 0;
     if (controllerState.isUpPressed()) {
-      dy = -SPEED;
+      dy = -this.currentSpeed;
     } else if (controllerState.isDownPressed()) {
-      dy = SPEED;
+      dy = this.currentSpeed;
     } else if (controllerState.isLeftPressed()) {
-      dx = -SPEED;
+      dx = -this.currentSpeed;
     } else if (controllerState.isRightPressed()) {
-      dx = SPEED;
+      dx = this.currentSpeed;
     } else {
       return;
     }
@@ -41,5 +55,12 @@ export class Player {
       this.sprite.x += dx;
       this.sprite.y += dy;
     }
+  }
+
+  getLocation(): Location {
+    return {
+      x: this.sprite.x,
+      y: this.sprite.y
+    };
   }
 }
