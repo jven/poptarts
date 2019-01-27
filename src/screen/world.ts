@@ -1,6 +1,7 @@
 import { Dimensions } from './dimensions';
 import { Location } from './location';
 import { Player } from './player';
+import { WorldBuilder } from './worldbuilder';
 
 const TOP_LEFT_HOUSE_X = 100;
 const TOP_LEFT_HOUSE_Y = 100;
@@ -37,8 +38,19 @@ export class World {
   render(): void {
     this.renderGrass();
     this.renderFloor();
-    this.renderExteriorWalls();
-    this.renderKidsRoomWalls();
+    new WorldBuilder(this.scene)
+        .interiorDoorwaySize(70)
+        .topWall(TOP_LEFT_HOUSE_X, TOP_LEFT_HOUSE_Y, 300)
+        .rightWallWithDoorway(
+            TOP_LEFT_HOUSE_X + 300,
+            TOP_LEFT_HOUSE_Y,
+            300,
+            TOP_LEFT_HOUSE_Y + 200)
+        .topWallWithDoorway(
+            TOP_LEFT_HOUSE_X,
+            TOP_LEFT_HOUSE_Y + 300,
+            300,
+            TOP_LEFT_HOUSE_X + 150);
   }
 
   spawnLocations(): Location[] {
@@ -92,91 +104,5 @@ export class World {
         HOUSE_WIDTH,
         HOUSE_HEIGHT,
         'insidefloor').setOrigin(0, 0);
-  }
-
-  private renderExteriorWalls(): void {
-    const top = this.scene.add.tileSprite(
-        TOP_LEFT_HOUSE_X,
-        TOP_LEFT_HOUSE_Y,
-        HOUSE_WIDTH,
-      this.spriteSize('insidewalltop').height,
-        'insidewalltop').setOrigin(0, 0);
-
-    const left = this.scene.add.tileSprite(
-        TOP_LEFT_HOUSE_X,
-        TOP_LEFT_HOUSE_Y,
-        this.spriteSize('insidewallleft').width,
-        HOUSE_HEIGHT,
-        'insidewallleft').setOrigin(0, 0);
-
-    const right = this.scene.add.tileSprite(
-        TOP_LEFT_HOUSE_X + HOUSE_WIDTH,
-        TOP_LEFT_HOUSE_Y,
-        this.spriteSize('insidewallleft').width,
-        HOUSE_HEIGHT,
-        'insidewallleft').setOrigin(1, 0).setFlipX(true);
-
-    this.obstacles.push(
-        this.wall(top),
-        this.wall(left),
-        this.wall(right));
-  }
-
-  private renderKidsRoomWalls(): void {
-    const kidsRoomWidth = 300;
-    const kidsRoomHeight = 300;
-    const doorwayCenterY = TOP_LEFT_HOUSE_Y + (
-        this.spriteSize('insidewalltop').height + kidsRoomHeight) / 2;
-    const right1 = this.scene.add.tileSprite(
-        TOP_LEFT_HOUSE_X + kidsRoomWidth,
-        TOP_LEFT_HOUSE_Y,
-        this.spriteSize('insidewallleft').width,
-        (doorwayCenterY - DOORWAY_WIDTH / 2 - TOP_LEFT_HOUSE_Y),
-        'insidewallleft').setOrigin(1, 0).setFlipX(true);
-    const right2 = this.scene.add.tileSprite(
-        TOP_LEFT_HOUSE_X + kidsRoomWidth,
-        TOP_LEFT_HOUSE_Y + kidsRoomHeight,
-        this.spriteSize('insidewallleft').width,
-        (TOP_LEFT_HOUSE_Y + kidsRoomHeight - doorwayCenterY -
-            DOORWAY_WIDTH / 2),
-        'insidewallleft').setOrigin(1, 1).setFlipX(true);
-    const bottom1 = this.scene.add.tileSprite(
-        TOP_LEFT_HOUSE_X,
-        TOP_LEFT_HOUSE_Y + kidsRoomHeight,
-        kidsRoomWidth / 2 - DOORWAY_WIDTH / 2,
-        this.spriteSize('insidewalltop').height,
-        'insidewalltop').setOrigin(0, 0);
-    const bottom2 = this.scene.add.tileSprite(
-        TOP_LEFT_HOUSE_X + kidsRoomWidth,
-        TOP_LEFT_HOUSE_Y + kidsRoomHeight,
-        kidsRoomWidth / 2 - DOORWAY_WIDTH / 2,
-        this.spriteSize('insidewalltop').height,
-        'insidewalltop').setOrigin(1, 0);
-    const doorway = this.scene.add.sprite(
-        TOP_LEFT_HOUSE_X + kidsRoomWidth,
-        doorwayCenterY - DOORWAY_WIDTH / 2,
-        'insidedoorway').setOrigin(1, 1);
-
-    this.obstacles.push(
-        this.wall(right1),
-        this.wall(right2),
-        this.wall(bottom1),
-        this.wall(bottom2),
-        this.wall(doorway));
-  }
-
-  private spriteSize(key: string): Dimensions {
-    const sprite = this.scene.add.sprite(-10000, -10000, 'insidewalltop');
-    const dimensions = {
-      width: sprite.displayWidth,
-      height: sprite.displayHeight
-    };
-    sprite.destroy();
-    return dimensions;
-  }
-
-  private wall(wall: Obstacle): Obstacle {
-    this.scene.physics.add.existing(wall, true /* isStatic */);
-    return wall;
   }
 }
