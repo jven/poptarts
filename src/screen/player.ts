@@ -1,5 +1,5 @@
 import { ControllerState } from './controllerstate/controllerstate';
-import { World } from './world';
+import { World } from './world/world';
 
 const SPEED = 5;
 

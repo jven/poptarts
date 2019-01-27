@@ -1,6 +1,6 @@
-import { Dimensions } from './dimensions';
+import { Dimensions } from '../dimensions';
+import { Location } from '../location';
 import { HouseBuilder } from './housebuilder';
-import { Location } from './location';
 
 const HOUSE_TOP_LEFT = {x: 100, y: 100};
 const HOUSE_DIMENSIONS = {width: 900, height: 600};

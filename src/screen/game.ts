@@ -3,7 +3,7 @@ import { ControllerStateMap } from './controllerstate/controllerstatemap';
 import { Item } from './item/item';
 import { ItemType } from './item/itemtype';
 import { Player } from './player';
-import { World } from './world';
+import { World } from './world/world';
 
 export class Game {
   private controllerStateMap: ControllerStateMap;

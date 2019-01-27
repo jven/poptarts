@@ -1,5 +1,5 @@
-import { Dimensions } from './dimensions';
-import { Location } from './location';
+import { Dimensions } from '../dimensions';
+import { Location } from '../location';
 
 export type Obstacle = Phaser.GameObjects.Sprite |
     Phaser.GameObjects.TileSprite;
