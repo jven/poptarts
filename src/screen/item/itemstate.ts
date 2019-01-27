@@ -109,7 +109,7 @@ export class Cookable implements ItemStateMachine {
         if (player.item === null) {
             if (this.state === COOKABLE_STATE.COOKED) {
                 // emit event player ate food
-                this.item.destroy();
+                this.eat();
                 console.log('Player ate food');
             } else if (this.state === COOKABLE_STATE.OVER_COOKED) {
                 console.log('player looks sadly at charred remains of \
@@ -194,7 +194,6 @@ export class Cookware implements ItemStateMachine {
             }
         } else {
             this.cookingItem.interact(player);
-
             this.cookingItem = null;
             this.state = COOK_STATE.NOT_COOKING;
             console.log('item removed from toaster');
