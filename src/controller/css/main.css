@@ -2,3 +2,8 @@ body {
   background-color: white;
   font-size: 30px;
 }
+
+button {
+  display: block;
+  font-size: 30px;
+}
