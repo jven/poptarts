@@ -45,6 +45,11 @@ export class Game {
     scene.load.image('outsidewall', 'img/house/outsidewall.png');
     scene.load.image(
         'outsidewallstart', 'img/house/outsidewallstart.png');
+
+    scene.load.spritesheet(
+        'p1', 'img/p1.png', {frameWidth: 24, frameHeight: 32});
+    scene.load.spritesheet(
+        'p2', 'img/p2.png', {frameWidth: 24, frameHeight: 32});
   }
 
   endGame(scene: Phaser.Scene,
@@ -70,10 +75,17 @@ export class Game {
     const deviceIds = Array.from(this.controllerStateMap.keys());
     for (let i = 0; i < deviceIds.length; i++) {
       const spawnLocation = this.world.spawnLocations()[i];
+      const spriteKey = (i % 2 == 0) ? 'p1' : 'p2';
       const sprite = scene.physics.add.sprite(
-          spawnLocation.x, spawnLocation.y, 'smiley');
-      this.playerMap.set(deviceIds[i], new Player(
-          deviceIds[i], this.world, sprite));
+          spawnLocation.x, spawnLocation.y, spriteKey);
+      this.playerMap.set(
+          deviceIds[i],
+          new Player(
+              scene,
+              deviceIds[i],
+              this.world,
+              spriteKey,
+              sprite));
     }
 
     const taskList = new TaskList(deviceIds);
