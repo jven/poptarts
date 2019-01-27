@@ -5,6 +5,7 @@ import { Cookable, Cookware, ItemStateMachine, Shower } from './item/itemstate';
 import { euclideanDistance } from './location';
 import { Player } from './player';
 import { World } from './world/world';
+import { GameClock } from './timer/gameclock';
 
 const interactionRadius = 40;
 
@@ -42,6 +43,10 @@ export class Game {
         'outsidewallstart', 'img/house/outsidewallstart.png');
   }
 
+  endGame(scene: Phaser.Scene) {
+    scene.sys.pause();
+  }
+
   create(scene: Phaser.Scene): void {
     this.world = new World(scene);
     this.world.render();
@@ -53,6 +58,10 @@ export class Game {
           spawnLocation.x, spawnLocation.y, 'smiley');
       this.playerMap.set(deviceIds[i], new Player(this.world, sprite));
     }
+
+    new GameClock(scene, 1200, 400, 10000, () => {
+      this.endGame(scene);
+    });
 
     this.items = [
       new Shower(
