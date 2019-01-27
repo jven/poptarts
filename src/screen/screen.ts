@@ -14,9 +14,18 @@ function screenResize() {
 }
 
 function screenMain() {
-  const airConsole = new AirConsole();
+  const map = new Map<number, ControllerState>();
 
-  airConsole.onConnect = function (deviceId) {
+  if (window.location.href.includes('keyboard=true')) {
+    const deviceIds = [111, 222];
+    initializeMap(map, deviceIds);
+    ControllerStateUpdater.updateFromArrowKeys(map, [111, 222]);
+    game = Game.createWithPhaserGame(map);
+    return;
+  }
+
+  const airConsole = new AirConsole();
+  airConsole.onConnect = function(deviceId) {
     const deviceIds = airConsole.getControllerDeviceIds();
 
     // Temporary Hack to delay start until 2 players (like in the emulator)
@@ -25,15 +34,15 @@ function screenMain() {
       return;
     }
 
-    const controllerStateMap = new Map<number, ControllerState>();
-    deviceIds.forEach((deviceId: number) => controllerStateMap
-        .set(deviceId, new ControllerState()));
-
-    new ControllerStateUpdater(controllerStateMap)
-        .updateFromAirConsole(airConsole);
-
-    game = Game.createWithPhaserGame(controllerStateMap);
+    initializeMap(map, deviceIds);
+    ControllerStateUpdater.updateFromAirConsole(map, airConsole);
+    game = Game.createWithPhaserGame(map);
   };
+}
+
+function initializeMap(map: ControllerStateMap, deviceIds: number[]): void {
+  deviceIds.forEach((deviceId: number) =>
+      map.set(deviceId, new ControllerState()));
 }
 
 window.onload = screenMain;
