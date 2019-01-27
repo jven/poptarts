@@ -1,4 +1,4 @@
-import { Intent } from '../../protocol/intent';
+import { Intent } from '../protocol/intent';
 import { ControllerState } from './controllerstate';
 import { ControllerStateMap } from './controllerstatemap';
 

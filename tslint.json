@@ -57,6 +57,6 @@
     ]
   },
   "linterOptions": {
-    "exclude": ["src/lib/phaser.d.ts"]
+    "exclude": ["src/definitions/phaser.d.ts"]
   }
 }
