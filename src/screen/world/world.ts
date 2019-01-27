@@ -2,7 +2,6 @@ import { Dimensions } from '../dimensions';
 import { Direction } from '../direction';
 import { Location } from '../location';
 import { HouseBuilder } from './housebuilder';
-import { GameClock } from '../timer/gameclock';
 
 const HOUSE_TOP_LEFT = {x: 100, y: 100};
 const HOUSE_DIMENSIONS = {width: 900, height: 600};
@@ -12,14 +11,11 @@ export type Obstacle = Phaser.GameObjects.Sprite |
 
 export class World {
   private scene: Phaser.Scene;
-  private gameClock: GameClock;
   private obstacles: Obstacle[];
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene;
     this.obstacles = [];
-    this.gameClock =
-      new GameClock(this.scene, 10000);
   }
 
   dimensions(): Dimensions {

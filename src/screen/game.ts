@@ -4,6 +4,8 @@ import { Item } from './item/item';
 import { Cookable, Cookware, ItemStateMachine, Shower } from './item/itemstate';
 import { euclideanDistance } from './location';
 import { Player } from './player';
+import { TaskList } from './tasks/tasklist';
+import { TaskListRenderer } from './tasks/tasklistrenderer';
 import { World } from './world/world';
 import { GameClock } from './timer/gameclock';
 
@@ -15,6 +17,7 @@ export class Game {
   private phaserGame: Phaser.Game | null;
   private world: World | null;
   private items: ItemStateMachine[];
+  private taskListRenderer: TaskListRenderer | null;
 
   private constructor(controllerStateMap: ControllerStateMap) {
     this.controllerStateMap = controllerStateMap;
@@ -22,6 +25,7 @@ export class Game {
     this.phaserGame = null;
     this.world = null;
     this.items = [];
+    this.taskListRenderer = null;
   }
 
   preload(scene: Phaser.Scene): void {
@@ -56,8 +60,12 @@ export class Game {
       const spawnLocation = this.world.spawnLocations()[i];
       const sprite = scene.physics.add.sprite(
           spawnLocation.x, spawnLocation.y, 'smiley');
-      this.playerMap.set(deviceIds[i], new Player(this.world, sprite));
+      this.playerMap.set(deviceIds[i], new Player(
+          deviceIds[i], this.world, sprite));
     }
+
+    const taskList = new TaskList(deviceIds);
+    this.taskListRenderer = new TaskListRenderer(scene, taskList.getAllTasks());
 
     new GameClock(scene, 1200, 400, 10000, () => {
       this.endGame(scene);
@@ -70,14 +78,17 @@ export class Game {
           {
             width: 80,
             height: 100
-          })),
+          }),
+          taskList
+        ),
       new Cookable(2000, 15000,
         new Item(
           scene.add.sprite(900, 600, 'poptartbox'),
           {
             width: 50,
             height: 50
-          })),
+          }),
+        taskList),
       new Cookware(
         new Item(
           scene.add.sprite(900, 400, 'toaster'),
@@ -97,6 +108,7 @@ export class Game {
 
 
   update(scene: Phaser.Scene): void {
+    this.taskListRenderer!.update();
     this.controllerStateMap.forEach((state, deviceId) => {
       const player = this.playerMap.get(deviceId)!;
       player.update(state);

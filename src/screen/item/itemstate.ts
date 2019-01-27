@@ -1,5 +1,6 @@
 import { Location } from '../location';
 import { Player } from '../player';
+import { TaskObserver } from '../tasks/taskobserver';
 import { Item } from './item';
 
 export interface ItemStateMachine {
@@ -17,12 +18,16 @@ enum SHOWER_STATES {
 export class Shower implements ItemStateMachine {
     private state: SHOWER_STATES;
     private item: Item;
+    private taskObserver: TaskObserver;
     private showerDuration: number;
+    private lastPlayerToUseShower: Player | null;
 
-    constructor(item: Item) {
+    constructor(item: Item, taskObserver: TaskObserver) {
         this.state = SHOWER_STATES.SHOWER_OFF;
         this.item = item;
+        this.taskObserver = taskObserver;
         this.showerDuration = 0;
+        this.lastPlayerToUseShower = null;
     }
 
     move(location: Location): void {}
@@ -31,7 +36,8 @@ export class Shower implements ItemStateMachine {
         if (this.state === SHOWER_STATES.SHOWER_IN_USE) {
             this.showerDuration += timeDelta;
             if (this.showerDuration > 3000) {
-                console.log('rinsing done');
+                this.taskObserver.notifyShowerComplete(
+                    this.lastPlayerToUseShower!);
             }
         }
     }
@@ -39,6 +45,7 @@ export class Shower implements ItemStateMachine {
     interact(player: Player): void {
         if (player.item === null
             && this.state === SHOWER_STATES.SHOWER_OFF) {
+                this.lastPlayerToUseShower = player;
                 player.immobilize();
                 player.item = this;
                 this.state = SHOWER_STATES.SHOWER_IN_USE;
@@ -70,15 +77,18 @@ export class Cookable implements ItemStateMachine {
     public cookTime: number;
     public ignitionTime: number;
     private item: Item;
+    private taskObserver: TaskObserver;
     private wasEaten: boolean;
 
     constructor(cookTime: number,
         ignitionTime: number,
-        item: Item) {
+        item: Item,
+        taskObserver: TaskObserver) {
         this.state = COOKABLE_STATE.NOT_HEATING;
         this.cookTime = cookTime;
         this.ignitionTime = ignitionTime;
         this.item = item;
+        this.taskObserver = taskObserver;
         this.wasEaten = false;
     }
 
@@ -108,7 +118,7 @@ export class Cookable implements ItemStateMachine {
     interact(player: Player): void {
         if (player.item === null) {
             if (this.state === COOKABLE_STATE.COOKED) {
-                // emit event player ate food
+                this.taskObserver.notifyEatPoptart(player);
                 this.eat();
                 console.log('Player ate food');
             } else if (this.state === COOKABLE_STATE.OVER_COOKED) {
