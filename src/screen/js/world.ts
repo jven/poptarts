@@ -13,9 +13,9 @@ export class World {
   }
 
   private static renderGrass(scene: Phaser.Scene): void {
-    scene.add.tileSprite(0, 0, 3200, 3200, 'grass');
-    for (let x = 0; x < 100; x++) {
-      for (let y = 0; y < 100; y++) {
+    scene.add.tileSprite(-3200, -3200, 6400, 6400, 'grass').setOrigin(0, 0);
+    for (let x = -100; x < 100; x++) {
+      for (let y = -100; y < 100; y++) {
         const p = Math.random();
         if (p < 0.15) {
           scene.add.sprite(32 * x, 32 * y, 'grassfun1');

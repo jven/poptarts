@@ -5,6 +5,14 @@ import { ControllerState } from './controllerstate';
 import { ControllerStateUpdater } from './controllerstateupdater';
 import { Game } from './game';
 
+let game: Game | null = null;
+
+function screenResize() {
+  if (game) {
+    game.resize();
+  }
+}
+
 function screenMain() {
   const airConsole = new AirConsole();
 
@@ -24,8 +32,9 @@ function screenMain() {
     new ControllerStateUpdater(controllerStateMap)
         .updateFromAirConsole(airConsole);
 
-    Game.createAndInitializePhaser(controllerStateMap);
+    game = Game.createWithPhaserGame(controllerStateMap);
   };
 }
 
 window.onload = screenMain;
+window.onresize = screenResize;
