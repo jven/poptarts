@@ -1,21 +1,39 @@
 import { Dimensions } from './dimensions';
+import { Location } from './location';
 
 export type Obstacle = Phaser.GameObjects.Sprite |
     Phaser.GameObjects.TileSprite;
 
 export class WorldBuilder {
   private scene: Phaser.Scene;
-  private interiorDoorwaySize_: number;
   private obstacles: Obstacle[];
+  private houseTopLeft_: Location;
+  private interiorDoorwaySize_: number;
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene;
-    this.interiorDoorwaySize_ = 0;
     this.obstacles = [];
+    this.houseTopLeft_ = {x: 0, y: 0};
+    this.interiorDoorwaySize_ = 0;
+  }
+
+  houseTopLeft(houseTopLeft: Location): WorldBuilder {
+    this.houseTopLeft_ = houseTopLeft;
+    return this;
   }
 
   interiorDoorwaySize(interiorDoorwaySize: number): WorldBuilder {
     this.interiorDoorwaySize_ = interiorDoorwaySize;
+    return this;
+  }
+
+  floor(dimensions: Dimensions): WorldBuilder {
+    this.scene.add.tileSprite(
+        this.houseTopLeft_.x,
+        this.houseTopLeft_.y,
+        dimensions.width,
+        dimensions.height,
+        'insidefloor').setOrigin(0, 0);
     return this;
   }
 
@@ -81,8 +99,8 @@ export class WorldBuilder {
         (topY + wallHeight - doorwayCenterY - this.interiorDoorwaySize_ / 2));
 
     const doorway = this.scene.add.sprite(
-        sideX,
-        doorwayCenterY - this.interiorDoorwaySize_ / 2,
+        this.houseTopLeft_.x + sideX,
+        this.houseTopLeft_.y + doorwayCenterY - this.interiorDoorwaySize_ / 2,
         'insidedoorway').setOrigin(originX, 1);
     this.obstacles.push(this.wall(doorway));
     return this;
@@ -94,8 +112,8 @@ export class WorldBuilder {
       topY: number,
       wallWidth: number): WorldBuilder {
     const wall = this.scene.add.tileSprite(
-        sideX,
-        topY,
+        this.houseTopLeft_.x + sideX,
+        this.houseTopLeft_.y + topY,
         wallWidth,
         this.spriteSize('insidewalltop').height,
         'insidewalltop').setOrigin(originX, 0);
@@ -111,8 +129,8 @@ export class WorldBuilder {
       wallY: number,
       wallHeight: number): WorldBuilder {
     const wall = this.scene.add.tileSprite(
-        sideX,
-        wallY,
+        this.houseTopLeft_.x + sideX,
+        this.houseTopLeft_.y + wallY,
         this.spriteSize('insidewallleft').width,
         wallHeight,
         'insidewallleft').setOrigin(originX, originY).setFlipX(flipX);

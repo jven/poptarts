@@ -3,11 +3,8 @@ import { Location } from './location';
 import { Player } from './player';
 import { WorldBuilder } from './worldbuilder';
 
-const TOP_LEFT_HOUSE_X = 100;
-const TOP_LEFT_HOUSE_Y = 100;
-const HOUSE_WIDTH = 900;
-const HOUSE_HEIGHT = 600;
-const DOORWAY_WIDTH = 60;
+const HOUSE_TOP_LEFT = {x: 100, y: 100};
+const HOUSE_DIMENSIONS = {width: 900, height: 600};
 
 export type Obstacle = Phaser.GameObjects.Sprite |
     Phaser.GameObjects.TileSprite;
@@ -22,35 +19,22 @@ export class World {
   }
 
   dimensions(): Dimensions {
-    return {
-      width: HOUSE_WIDTH,
-      height: HOUSE_HEIGHT
-    };
+    return HOUSE_DIMENSIONS;
   }
 
   topLeftLocation(): Location {
-    return {
-      x: TOP_LEFT_HOUSE_X,
-      y: TOP_LEFT_HOUSE_Y
-    };
+    return HOUSE_TOP_LEFT;
   }
 
   render(): void {
     this.renderGrass();
-    this.renderFloor();
     new WorldBuilder(this.scene)
+        .houseTopLeft(HOUSE_TOP_LEFT)
         .interiorDoorwaySize(70)
-        .topWall(TOP_LEFT_HOUSE_X, TOP_LEFT_HOUSE_Y, 300)
-        .rightWallWithDoorway(
-            TOP_LEFT_HOUSE_X + 300,
-            TOP_LEFT_HOUSE_Y,
-            300,
-            TOP_LEFT_HOUSE_Y + 200)
-        .topWallWithDoorway(
-            TOP_LEFT_HOUSE_X,
-            TOP_LEFT_HOUSE_Y + 300,
-            300,
-            TOP_LEFT_HOUSE_X + 150);
+        .floor(HOUSE_DIMENSIONS)
+        .topWall(0, 0, 300)
+        .rightWallWithDoorway(300, 0, 300, 200)
+        .topWallWithDoorway(0, 300, 300, 150);
   }
 
   spawnLocations(): Location[] {
@@ -95,14 +79,5 @@ export class World {
         }
       }
     }
-  }
-
-  private renderFloor(): void {
-    this.scene.add.tileSprite(
-        TOP_LEFT_HOUSE_X,
-        TOP_LEFT_HOUSE_Y,
-        HOUSE_WIDTH,
-        HOUSE_HEIGHT,
-        'insidefloor').setOrigin(0, 0);
   }
 }
