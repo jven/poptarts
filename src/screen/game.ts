@@ -1,7 +1,4 @@
-/// <reference path='../../lib/index.d.ts'/>
-
 import Phaser = require('phaser');
-import { poptart } from '../img/poptart.png';
 import { ControllerStateMap } from './controllerstatemap';
 import { Player } from './player';
 

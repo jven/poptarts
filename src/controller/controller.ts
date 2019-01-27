@@ -1,4 +1,4 @@
-/// <reference path="../../../node_modules/airconsole-typescript/airconsole-typescript.d.ts" />
+/// <reference path="../../node_modules/airconsole-typescript/airconsole-typescript.d.ts" />
 
 import { Intent } from '../protocol/intent';
 import { IntentSender } from './intentsender';

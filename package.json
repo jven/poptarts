@@ -4,7 +4,7 @@
   "description": "Game for Global Game Jam 2019",
   "main": "N/A",
   "scripts": {
-    "ngrok": "ngrok http 1234",
+    "ngrok": "ngrok http 5000",
     "dev": "npm run dev:compile",
     "dev:server": "http-server -p 5000 app/",
     "dev:clean": "rm -rf app/js",

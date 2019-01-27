@@ -1,5 +1,5 @@
-/// <reference path="../../../node_modules/airconsole-typescript/airconsole-typescript.d.ts" />
-/// <reference path="../../lib/phaser.d.ts" />
+/// <reference path="../../node_modules/airconsole-typescript/airconsole-typescript.d.ts" />
+/// <reference path="../definitions/phaser.d.ts" />
 
 import { ControllerState } from './controllerstate';
 import { ControllerStateUpdater } from './controllerstateupdater';
