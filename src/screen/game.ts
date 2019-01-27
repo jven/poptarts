@@ -18,22 +18,25 @@ export class Game {
   }
 
   preload(scene: Phaser.Scene): void {
-    scene.load.image('grass', 'screen/img/grass.jpg');
-    scene.load.image('grassfun1', 'screen/img/grassfun1.jpg');
-    scene.load.image('grassfun2', 'screen/img/grassfun2.jpg');
-    scene.load.image('grassfun3', 'screen/img/grassfun3.jpg');
-    scene.load.image('poptart', 'screen/img/poptart.png');
-    scene.load.image('poptartbox', 'screen/img/poptartbox.png');
-    scene.load.image('shower', 'screen/img/shower.png');
-    scene.load.image('smiley', 'screen/img/smiley.png');
-    scene.load.image('toaster', 'screen/img/toaster.png');
 
-    scene.load.image('insidefloor', 'screen/img/house/insidefloor.png');
-    scene.load.image('insidewallleft', 'screen/img/house/insidewallleft.png');
-    scene.load.image('insidewalltop', 'screen/img/house/insidewalltop.png');
-    scene.load.image('outsidewall', 'screen/img/house/outsidewall.png');
+    scene.load.image('grass', 'img/grass.jpg');
+    scene.load.image('grassfun1', 'img/grassfun1.jpg');
+    scene.load.image('grassfun2', 'img/grassfun2.jpg');
+    scene.load.image('grassfun3', 'img/grassfun3.jpg');
+    scene.load.image('poptart', 'img/poptart.png');
+    scene.load.image('poptartbox', 'img/poptartbox.png');
+    scene.load.image('shower', 'img/shower.png');
+    scene.load.image('smiley', 'img/smiley.png');
+    scene.load.image('toaster', 'img/toaster.png');
+
+    scene.load.image('insidefloor', 'img/house/insidefloor.png');
+    scene.load.image('insidewallleft', 'img/house/insidewallleft.png');
+    scene.load.image('insidewalltop', 'img/house/insidewalltop.png');
+    scene.load.image('outsidewall', 'img/house/outsidewall.png');
     scene.load.image(
-        'outsidewallstart', 'screen/img/house/outsidewallstart.png');
+        'outsidewallstart', 'img/house/outsidewallstart.png');
+
+
   }
 
   create(scene: Phaser.Scene): void {
