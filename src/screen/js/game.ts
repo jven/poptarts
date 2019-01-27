@@ -27,6 +27,13 @@ export class Game {
     scene.load.image('shower', 'screen/img/shower.png');
     scene.load.image('smiley', 'screen/img/smiley.png');
     scene.load.image('toaster', 'screen/img/toaster.png');
+
+    scene.load.image('insidefloor', 'screen/img/house/insidefloor.png');
+    scene.load.image('insidewallleft', 'screen/img/house/insidewallleft.png');
+    scene.load.image('insidewalltop', 'screen/img/house/insidewalltop.png');
+    scene.load.image('outsidewall', 'screen/img/house/outsidewall.png');
+    scene.load.image(
+        'outsidewallstart', 'screen/img/house/outsidewallstart.png');
   }
 
   create(scene: Phaser.Scene): void {

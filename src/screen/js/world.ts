@@ -1,6 +1,15 @@
+import { Dimensions } from './dimensions';
+
+const TOP_LEFT_HOUSE_X = 100;
+const TOP_LEFT_HOUSE_Y = 100;
+const HOUSE_WIDTH = 1000;
+const HOUSE_HEIGHT = 800;
+
 export class World {
   static renderToScene(scene: Phaser.Scene): void {
     World.renderGrass(scene);
+    World.renderFloor(scene);
+    World.renderWalls(scene);
   }
 
   private static renderGrass(scene: Phaser.Scene): void {
@@ -17,5 +26,47 @@ export class World {
         }
       }
     }
+  }
+
+  private static renderFloor(scene: Phaser.Scene): void {
+    scene.add.tileSprite(
+        TOP_LEFT_HOUSE_X,
+        TOP_LEFT_HOUSE_Y,
+        HOUSE_WIDTH,
+        HOUSE_HEIGHT,
+        'insidefloor').setOrigin(0, 0);
+  }
+
+  private static renderWalls(scene: Phaser.Scene): void {
+    scene.add.tileSprite(
+        TOP_LEFT_HOUSE_X,
+        TOP_LEFT_HOUSE_Y,
+        HOUSE_WIDTH,
+        World.spriteSize(scene, 'insidewalltop').height,
+        'insidewalltop').setOrigin(0, 0);
+
+    scene.add.tileSprite(
+        TOP_LEFT_HOUSE_X,
+        TOP_LEFT_HOUSE_Y,
+        World.spriteSize(scene, 'insidewallleft').width,
+        HOUSE_HEIGHT,
+        'insidewallleft').setOrigin(0, 0);
+
+    scene.add.tileSprite(
+        TOP_LEFT_HOUSE_X + HOUSE_WIDTH,
+        TOP_LEFT_HOUSE_Y,
+        World.spriteSize(scene, 'insidewallleft').width,
+        HOUSE_HEIGHT,
+        'insidewallleft').setOrigin(1, 0).setFlipX(true);
+  }
+
+  private static spriteSize(scene: Phaser.Scene, key: string): Dimensions {
+    const sprite = scene.add.sprite(-10000, -10000, 'insidewalltop');
+    const dimensions = {
+      width: sprite.displayWidth,
+      height: sprite.displayHeight
+    };
+    sprite.destroy();
+    return dimensions;
   }
 }
