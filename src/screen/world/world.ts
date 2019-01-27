@@ -57,9 +57,9 @@ export class World {
   spawnLocations(): Location[] {
     return [
       {x: 300, y: 300},
-      {x: 700, y: 300},
-      {x: 400, y: 500},
-      {x: 800, y: 500}
+      {x: 800, y: 300},
+      {x: 400, y: 600},
+      {x: 800, y: 600}
     ];
   }
 
