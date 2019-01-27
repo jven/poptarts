@@ -6,6 +6,7 @@ import { euclideanDistance } from './location';
 import { Player } from './player';
 import { TaskList } from './tasks/tasklist';
 import { TaskListRenderer } from './tasks/tasklistrenderer';
+import { GameClock } from './timer/gameclock';
 import { World } from './world/world';
 
 const interactionRadius = 40;
@@ -51,6 +52,22 @@ export class Game {
         'p2', 'img/p2.png', {frameWidth: 24, frameHeight: 32});
   }
 
+  endGame(scene: Phaser.Scene,
+    taskList: TaskList) {
+    scene.sys.pause();
+
+    const tasks = taskList.getAllTasks();
+    console.log('tasks', tasks);
+    for (let task of tasks) {
+      if (!task.isDone()) {
+        console.log(task);
+        scene.add.sprite(400, 400, 'shower');
+        return;
+      }
+    }
+    scene.add.sprite(400, 400, 'poptartbox');
+  }
+
   create(scene: Phaser.Scene): void {
     this.world = new World(scene);
     this.world.render();
@@ -73,6 +90,13 @@ export class Game {
 
     const taskList = new TaskList(deviceIds);
     this.taskListRenderer = new TaskListRenderer(scene, taskList.getAllTasks());
+
+    const gameDurationMs = 60 * 1000;
+
+    new GameClock(scene, 1200, 400, gameDurationMs, () => {
+      this.endGame(scene, taskList);
+    });
+
     this.items = [
       new Shower(
         new Item(
@@ -100,6 +124,8 @@ export class Game {
           })
       )
     ];
+
+    console.log(taskList);
 
     const houseTopLeft = this.world.topLeftLocation();
     scene.cameras.main
