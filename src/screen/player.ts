@@ -6,12 +6,17 @@ import { World } from './world/world';
 const SPEED = 5;
 
 export class Player {
+  public deviceId: number;
   private world: World;
   private sprite: Phaser.Physics.Arcade.Sprite;
   public item: ItemStateMachine | null;
   private currentSpeed: number;
 
-  constructor(world: World, sprite: Phaser.Physics.Arcade.Sprite) {
+  constructor(
+      deviceId: number,
+      world: World,
+      sprite: Phaser.Physics.Arcade.Sprite) {
+    this.deviceId = deviceId;
     this.world = world;
     this.sprite = sprite;
     this.sprite.displayWidth = 50;
