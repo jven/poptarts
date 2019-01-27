@@ -6,8 +6,8 @@ import { euclideanDistance } from './location';
 import { Player } from './player';
 import { TaskList } from './tasks/tasklist';
 import { TaskListRenderer } from './tasks/tasklistrenderer';
-import { World } from './world/world';
 import { GameClock } from './timer/gameclock';
+import { World } from './world/world';
 
 const interactionRadius = 40;
 
@@ -47,8 +47,20 @@ export class Game {
         'outsidewallstart', 'img/house/outsidewallstart.png');
   }
 
-  endGame(scene: Phaser.Scene) {
+  endGame(scene: Phaser.Scene,
+    taskList: TaskList) {
     scene.sys.pause();
+
+    const tasks = taskList.getAllTasks();
+    console.log('tasks', tasks);
+    for (let task of tasks) {
+      if (!task.isDone()) {
+        console.log(task);
+        scene.add.sprite(400, 400, 'shower');
+        return;
+      }
+    }
+    scene.add.sprite(400, 400, 'poptartbox');
   }
 
   create(scene: Phaser.Scene): void {
@@ -67,8 +79,10 @@ export class Game {
     const taskList = new TaskList(deviceIds);
     this.taskListRenderer = new TaskListRenderer(scene, taskList.getAllTasks());
 
-    new GameClock(scene, 1200, 400, 10000, () => {
-      this.endGame(scene);
+    const gameDurationMs = 5 * 1000;
+
+    new GameClock(scene, 1200, 400, gameDurationMs, () => {
+      this.endGame(scene, taskList);
     });
 
     this.items = [
@@ -98,6 +112,8 @@ export class Game {
           })
       )
     ];
+
+    console.log(taskList);
 
     const houseTopLeft = this.world.topLeftLocation();
     scene.cameras.main
