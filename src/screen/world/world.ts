@@ -1,4 +1,5 @@
 import { Dimensions } from '../dimensions';
+import { Direction } from '../direction';
 import { Location } from '../location';
 import { HouseBuilder } from './housebuilder';
 
@@ -27,13 +28,30 @@ export class World {
 
   render(): void {
     this.renderGrass();
-    new HouseBuilder(this.scene)
+    this.obstacles = new HouseBuilder(this.scene)
         .houseTopLeft(HOUSE_TOP_LEFT)
         .interiorDoorwaySize(70)
         .floor(HOUSE_DIMENSIONS)
-        .topWall(0, 0, 300)
-        .rightWallWithDoorway(300, 0, 300, 200)
-        .topWallWithDoorway(0, 300, 300, 150);
+        .roomWithDoorways(
+            {x: 0, y: 0},
+            {width: 300, height: 300},
+            new Map<Direction, number>()
+                .set(Direction.RIGHT, 200)
+                .set(Direction.DOWN, 150))
+        .roomWithDoorways(
+            {x: 300, y: 0},
+            {width: 300, height: 300},
+            new Map<Direction, number>()
+                .set(Direction.LEFT, 200)
+                .set(Direction.DOWN, 150))
+        .roomWithDoorways(
+            {x: 600, y: 0},
+            {width: 300, height: 600},
+            new Map<Direction, number>()
+                .set(Direction.LEFT, 500))
+        .leftWall(0, 300, 300)
+        .topWall(0, HOUSE_DIMENSIONS.height, HOUSE_DIMENSIONS.width)
+        .getObstacles();
   }
 
   spawnLocations(): Location[] {

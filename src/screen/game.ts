@@ -58,7 +58,7 @@ export class Game {
         });
     new Item(
         ItemType.SHOWER,
-        scene.add.sprite(700, 300, 'shower'),
+        scene.add.sprite(600, 300, 'shower'),
         {
           width: 80,
           height: 100
@@ -70,6 +70,12 @@ export class Game {
           width: 50,
           height: 50
         });
+
+    const houseTopLeft = this.world.topLeftLocation();
+    scene.cameras.main
+        .setScroll(
+            houseTopLeft.x - 50,
+            houseTopLeft.y - 50);
   }
 
 
